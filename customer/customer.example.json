@@ -5,6 +5,10 @@
   "name3": null,
   "phoneNumber1": "+431234567890",
   "phoneNumber2": "+431234567891",
+  "emailAddresses": {
+    "invoicing": "invoicing@acme.com",
+    "work": "office@acme.com"
+  },
   "isReseller": true,
   "resellerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def",
   "parentId": "e3c4d5b6-a7c8-9d0e-1f23-456789abcdef",
