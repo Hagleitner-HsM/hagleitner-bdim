@@ -1,0 +1,63 @@
+{
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "Customer",
+    "type": "object",
+    "unevaluatedProperties": false,
+    "properties": {
+        "id": {
+            "$ref": "basetypes.schema.json#/$defs/uuid"
+        },
+        "name1": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "maxLength": 100
+        },
+        "name2": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "maxLength": 50
+        },
+        "name3": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "maxLength": 30
+        },
+        "phoneNumber1": {
+            "$ref": "basetypes.schema.json#/$defs/phoneE164",
+            "description": "Phone number 1"
+        },
+        "phoneNumber2": {
+            "$ref": "basetypes.schema.json#/$defs/phoneE164",
+            "description": "Phone number 2"
+        },
+        "isReseller": {
+            "type": "boolean",
+            "description": "If true, the customer is a reseller, and can therefore have sub-customers. A customer can become a reseller, but a reseller cannot be converted back to a regular customer."
+        },
+        "resellerId": {
+            "$ref": "basetypes.schema.json#/$defs/uuid",
+            "description": "References the reseller this customer belongs to. Reseller relationships form a strict tree hierarchy. Circular references are not allowed, there is no limit to the depth of the tree. The resellerId must be given for all customers but 1 root customer. Only customers with isReseller=true can be referenced as a resellerId."
+        },
+        "parentId": {
+            "$ref": "basetypes.schema.json#/$defs/uuid"
+        },
+        "conditionOwnerId": {
+            "$ref": "basetypes.schema.json#/$defs/uuid"
+        },
+        "invoiceRecipientId": {
+            "$ref": "basetypes.schema.json#/$defs/uuid"
+        }
+    },
+    "dependentRequired": {
+        "name2": [
+            "name1"
+        ],
+        "name3": [
+            "name2",
+            "name1"
+        ]
+    },
+    "allOf": [
+        {
+            "$ref": "address.schema.json"
+        }
+    ]
+}

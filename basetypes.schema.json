@@ -1,0 +1,22 @@
+{
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/basetypes.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "Address",
+    "type": "object",
+    "$defs": {
+        "singleLineText": {
+            "type": ["string", "null"],
+            "minLength": 1,
+            "pattern": "^[^\\u0000-\\u001F\\u007F\\s](?:[^\\u0000-\\u001F\\u007F]*[^\\u0000-\\u001F\\u007F\\s])?$"
+        },
+        "uuid": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "phoneE164": {
+            "type": ["string", "null"],
+            "description": "Phone number formatted as E.164",
+            "pattern": "^\\+[1-9]\\d{1,14}$"
+        }
+    }
+}

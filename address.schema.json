@@ -1,0 +1,58 @@
+{
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/address.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "Address",
+    "type": "object",
+    "required": [
+        "address1",
+        "zipCode",
+        "city",
+        "countryCode"
+    ],
+    "properties": {
+        "address1": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "maxLength": 100
+        },
+        "address2": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "maxLength": 50
+        },
+        "zipCode": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "maxLength": 20
+        },
+        "city": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "maxLength": 30
+        },
+        "countryCode": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "A valid ISO 3166-1 alpha-2 country code"
+        },
+        "latitude": {
+            "type": "number",
+            "description": "Latitude of the location associated with the address, given in decimal degrees (WGS84, EPSG:4326)",
+            "minimum": -90,
+            "maximum": 90
+        },
+        "longitude": {
+            "type": "number",
+            "description": "Longitude of the location associated with the address, given in decimal degrees (WGS84, EPSG:4326)",        
+            "minimum": -180,
+            "maximum": 180           
+        }
+    },
+    "dependentRequired": {
+        "Latitude": [
+            "Longitude"
+        ],
+        "Longitude": [
+            "Latitude"
+        ],
+        "address2": [
+            "address1"
+        ]
+    }
+}

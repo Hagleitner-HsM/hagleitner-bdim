@@ -1,0 +1,19 @@
+{
+  "id": "b7e6a1c2-3f4d-4e2a-9b1a-123456789abc",
+  "name1": "Acme Corporation",
+  "name2": "Sales Department",
+  "name3": null,
+  "phoneNumber1": "+431234567890",
+  "phoneNumber2": "+431234567891",
+  "isReseller": true,
+  "resellerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def",
+  "parentId": "e3c4d5b6-a7c8-9d0e-1f23-456789abcdef",
+  "conditionOwnerId": "f4e5d6c7-b8a9-0d1e-2f34-56789abcdef0",
+  "invoiceRecipientId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab",
+  "address1": "Musterstraße 1",
+  "address2": null,
+  "city": "Innsbruck",
+  "countryCode": "AT",
+  "latitude": 44.123489,
+  "longitude": 123.78
+}

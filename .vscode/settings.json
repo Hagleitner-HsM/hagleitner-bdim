@@ -1,0 +1,11 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "customer.example.json"
+      ],
+      "url": "./customer.schema.json"
+    },
+
+  ]
+}
