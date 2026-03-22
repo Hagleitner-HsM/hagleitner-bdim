@@ -16,6 +16,7 @@
 * Cannot be changed from true to false if the reseller has linked sub-customers
 
 ## Things to discuss
+* IsLead or some kind of customer classification would make sense for other tools that only want to work with "active" customers.
 * Should a resellet be a separate entity (pro: specific propeties, con: ?)
 * Do customer relations have properties?
 * email addresses as specific email properties: pro: explicit, con: new types need contract change

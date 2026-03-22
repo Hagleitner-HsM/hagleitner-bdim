@@ -45,11 +45,11 @@
         }
     },
     "dependentRequired": {
-        "Latitude": [
-            "Longitude"
+        "latitude": [
+            "longitude"
         ],
-        "Longitude": [
-            "Latitude"
+        "longitude": [
+            "latitude"
         ],
         "address2": [
             "address1"

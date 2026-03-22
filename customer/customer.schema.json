@@ -4,6 +4,12 @@
     "description": "Customer",
     "type": "object",
     "unevaluatedProperties": false,
+    "required": [
+        "id",
+        "name1",
+        "status",
+        "resellerId"
+    ],
     "properties": {
         "id": {
             "$ref": "../components/basetypes.schema.json#/$defs/uuid"
@@ -30,20 +36,27 @@
         },
         "isReseller": {
             "type": "boolean",
-            "description": "If true, the customer is a reseller, and can therefore have sub-customers. A customer can become a reseller, but a reseller cannot be converted back to a regular customer."
+            "description": "If true, the customer is a reseller, and can therefore have sub-customers. A customer can become a reseller, but a reseller cannot be converted back to a regular customer.",
+            "default": false
         },
         "resellerId": {
-            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+            "oneOf": [
+                { "$ref": "../components/basetypes.schema.json#/$defs/uuid" },
+                { "type": "null" }
+            ],
             "description": "References the reseller this customer belongs to. Reseller relationships form a strict tree hierarchy. Circular references are not allowed, there is no limit to the depth of the tree. The resellerId must be given for all customers but 1 root customer. Only customers with isReseller=true can be referenced as a resellerId."
         },
         "parentId": {
-            "$ref": "../components/basetypes.schema.json#/$defs/uuid"
+            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+            "default": null
         },
         "conditionOwnerId": {
-            "$ref": "../components/basetypes.schema.json#/$defs/uuid"
+            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+            "default": null
         },
         "invoiceRecipientId": {
-            "$ref": "../components/basetypes.schema.json#/$defs/uuid"
+            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+            "default": null
         },
         "status": {
             "type": "string",
@@ -60,6 +73,10 @@
             },
             "unevaluatedProperties": false,
             "minProperties": 1
+        },
+        "hash": {
+            "type": "string",
+            "description": "Hash of the customer data, used for change detection. The hash is calculated by concatenating the values of all properties (except id and hash) in a predefined order, and then applying a hash function (e.g. SHA-256) to the resulting string. The hash is updated whenever any of the customer's properties (except id and hash) are changed. The hash can be used to detect changes to the customer data without having to compare each property individually."
         }
     },
     "dependentRequired": {
