@@ -1,0 +1,45 @@
+{
+  "$id": "https://schema.hagleitner.com/bdim/2026-06-01/error.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ErrorResponse",
+  "description": "Error response schema for AMQP and REST, based on RFC-7807",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": ["error"],
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/error"
+    }
+  },
+  "$defs": {
+    "error": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": ["code"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Optional target of the error (field, entity, operation)."
+        },
+        "details": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/error" },
+          "description": "Nested or multiple errors."
+        },
+        "innerError": {
+          "type": "object",
+          "description": "Implementation-specific diagnostic details. Only include for trusted/internal clients.",
+          "unevaluatedProperties": true
+        }
+      }
+    }
+  }
+}

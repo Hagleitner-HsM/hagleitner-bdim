@@ -1,0 +1,24 @@
+{
+	"error": {
+		"code": "validation.failed",
+		"message": "The request payload is invalid.",
+		"target": "customer",
+		"details": [
+			{
+				"code": "field.required",
+				"message": "The field is required.",
+				"target": "name1"
+			},
+			{
+				"code": "field.invalid",
+				"message": "The value does not match the expected format.",
+				"target": "emailAddresses.work"
+			}
+		],
+		"innerError": {
+			"traceId": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+			"correlationId": "6fdc1a4c-46d5-4b16-9d59-0dc64b6bdcab",
+			"timestamp": "2026-03-23T10:15:30Z"
+		}
+	}
+}

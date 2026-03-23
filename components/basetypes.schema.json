@@ -21,6 +21,13 @@
         "email": {
             "type": "string",
             "format": "email"
+        },
+        "contentHash": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64,
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "Cryptographic hash of the object's canonical content, excluding the contentHash property itself."
         }
     }
 }

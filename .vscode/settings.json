@@ -2,9 +2,9 @@
   "json.schemas": [
     {
       "fileMatch": [
-        "customer.example.json"
+        "customer.common.example.json"
       ],
-      "url": "./customer/customer.schema.json"
+      "url": "./customer/customer.common.schema.json"
     },
 
   ]

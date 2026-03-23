@@ -1,8 +1,12 @@
 # Customer
 
-# Message type
-* customer.create (includes resellerId)
-* customer.update (does not include reseller id)
+## AMQP Message types
+### Events
+* customer.created 
+* customer.updated
+
+### Commands
+* customer.update
 
 ## Validation rules
 
@@ -14,6 +18,9 @@
 
 ### isReseller
 * Cannot be changed from true to false if the reseller has linked sub-customers
+
+### contentHash
+* While theoretically the entity owner can choose the hash algorithm (and entity consumers just store it), it is beneficial to define 
 
 ## Things to discuss
 * IsLead or some kind of customer classification would make sense for other tools that only want to work with "active" customers.

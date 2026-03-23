@@ -8,7 +8,8 @@
         "id",
         "name1",
         "status",
-        "resellerId"
+        "resellerId",
+        "contentHash"
     ],
     "properties": {
         "id": {
@@ -74,9 +75,8 @@
             "unevaluatedProperties": false,
             "minProperties": 1
         },
-        "hash": {
-            "type": "string",
-            "description": "Hash of the customer data, used for change detection. The hash is calculated by concatenating the values of all properties (except id and hash) in a predefined order, and then applying a hash function (e.g. SHA-256) to the resulting string. The hash is updated whenever any of the customer's properties (except id and hash) are changed. The hash can be used to detect changes to the customer data without having to compare each property individually."
+        "contentHash": {
+            "$ref": "../components/basetypes.schema.json#/$defs/contentHash"
         }
     },
     "dependentRequired": {

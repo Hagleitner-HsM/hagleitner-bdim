@@ -17,7 +17,10 @@
   "address1": "Musterstraße 1",
   "address2": null,
   "city": "Innsbruck",
+  "zipCode": "9000",
+  "status": "active",
   "countryCode": "AT",
   "latitude": 44.123489,
-  "longitude": 123.78
+  "longitude": 123.78,
+  "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 }
