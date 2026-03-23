@@ -6,13 +6,14 @@
   "phoneNumber1": "+431234567890",
   "phoneNumber2": "+431234567891",
   "emailAddresses": {
-    "invoicing": "invoicing@acme.com",
-    "work": "office@acme.com"
+    "primary": "invoicing@acme.com",
+    "invoice": "office@acme.com"
   },
   "roles": ["reseller"],
   "customerRelations": {
     "reseller": {
-      "anchestorCustomerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def"
+      "anchestorCustomerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def",
+      "erpTenantId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab"
     },
     "invoice": {
       "anchestorCustomerId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab"
@@ -30,7 +31,7 @@
   "zipCode": "9000",
   "status": "active",
   "countryCode": "AT",
-  "latitude": 44.123489,
-  "longitude": 123.78,
+  "latitude": 47.202778,
+  "longitude": 14.280833,
   "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 }

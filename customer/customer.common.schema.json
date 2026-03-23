@@ -15,6 +15,10 @@
         "id": {
             "$ref": "../components/basetypes.schema.json#/$defs/uuid"
         },
+        "erpCustomerId": {
+            "type": "string",
+            "pattern": "^[A-Z0-9]{1,20}$"
+        },
         "name1": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
             "maxLength": 100
@@ -34,6 +38,11 @@
         "phoneNumber2": {
             "$ref": "../components/basetypes.schema.json#/$defs/phoneE164",
             "description": "Phone number 2"
+        },
+        "status": {
+            "type": "string",
+            "enum": ["active", "deleted"],
+            "description": "The status of the customer"
         },
         "roles": {
             "type": "array",
@@ -59,6 +68,9 @@
                                 { "$ref": "../components/basetypes.schema.json#/$defs/uuid" },
                                 { "type": "null" }
                             ]
+                        },
+                        "erpTenantId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuid"
                         }
                     }
                 },
@@ -88,18 +100,16 @@
                 }
             }
         },
-        "status": {
-            "type": "string",
-            "enum": ["active", "inactive", "suspended"],
-            "description": "The status of the customer. Active customers are regular customers that can place orders. Inactive customers are customers that have been deactivated and cannot place orders. Suspended customers are customers that have been temporarily suspended and cannot place orders. The status of a customer can be changed, but a customer cannot be deleted. Instead, it can be marked as inactive."
-        },
         "emailAddresses": {
             "type": "object",
             "properties": {
-                "work":      { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "private":   { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "invoicing": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "other":     { "$ref": "../components/basetypes.schema.json#/$defs/email" }
+                "primary": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "orderConfirmation":   { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "invoice": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "invoiceCc": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "paymentReminder": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "paymentReminderCc": { "$ref": "../components/basetypes.schema.json#/$defs/email"},
+                "shippingAdvice": { "$ref": "../components/basetypes.schema.json#/$defs/email"}
             },
             "unevaluatedProperties": false,
             "minProperties": 1
