@@ -10,10 +10,20 @@
     "work": "office@acme.com"
   },
   "isReseller": true,
-  "resellerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def",
-  "parentId": "e3c4d5b6-a7c8-9d0e-1f23-456789abcdef",
-  "conditionOwnerId": "f4e5d6c7-b8a9-0d1e-2f34-56789abcdef0",
-  "invoiceRecipientId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab",
+  "customerRelations": {
+    "reseller": {
+      "anchestorCustomerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def"
+    },
+    "invoice": {
+      "anchestorCustomerId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab"
+    },
+    "condition": {
+      "anchestorCustomerId": "f4e5d6c7-b8a9-0d1e-2f34-56789abcdef0"
+    },
+    "hierarchy": {
+      "anchestorCustomerId": "e3c4d5b6-a7c8-9d0e-1f23-456789abcdef"
+    }
+  },
   "address1": "Musterstraße 1",
   "address2": null,
   "city": "Innsbruck",

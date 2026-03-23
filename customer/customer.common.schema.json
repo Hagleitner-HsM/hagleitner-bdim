@@ -8,7 +8,7 @@
         "id",
         "name1",
         "status",
-        "resellerId",
+        "customerRelations",
         "contentHash"
     ],
     "properties": {
@@ -40,24 +40,51 @@
             "description": "If true, the customer is a reseller, and can therefore have sub-customers. A customer can become a reseller, but a reseller cannot be converted back to a regular customer.",
             "default": false
         },
-        "resellerId": {
-            "oneOf": [
-                { "$ref": "../components/basetypes.schema.json#/$defs/uuid" },
-                { "type": "null" }
+        "customerRelations": {
+            "type": "object",
+            "unevaluatedProperties": false,
+            "required": [
+                "reseller"
             ],
-            "description": "References the reseller this customer belongs to. Reseller relationships form a strict tree hierarchy. Circular references are not allowed, there is no limit to the depth of the tree. The resellerId must be given for all customers but 1 root customer. Only customers with isReseller=true can be referenced as a resellerId."
-        },
-        "parentId": {
-            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
-            "default": null
-        },
-        "conditionOwnerId": {
-            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
-            "default": null
-        },
-        "invoiceRecipientId": {
-            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
-            "default": null
+            "properties": {
+                "reseller": {
+                    "type": "object",
+                    "unevaluatedProperties": false,
+                    "required": ["anchestorCustomerId"],
+                    "properties": {
+                        "anchestorCustomerId": {
+                            "oneOf": [
+                                { "$ref": "../components/basetypes.schema.json#/$defs/uuid" },
+                                { "type": "null" }
+                            ]
+                        }
+                    }
+                },
+                "invoice": {
+                    "type": "object",
+                    "unevaluatedProperties": false,
+                    "required": ["anchestorCustomerId"],
+                    "properties": {
+                        "anchestorCustomerId": { "$ref": "../components/basetypes.schema.json#/$defs/uuid" }
+                    }
+                },
+                "condition": {
+                    "type": "object",
+                    "unevaluatedProperties": false,
+                    "required": ["anchestorCustomerId"],
+                    "properties": {
+                        "anchestorCustomerId": { "$ref": "../components/basetypes.schema.json#/$defs/uuid" }
+                    }
+                },
+                "hierarchy": {
+                    "type": "object",
+                    "unevaluatedProperties": false,
+                    "required": ["anchestorCustomerId"],
+                    "properties": {
+                        "anchestorCustomerId": { "$ref": "../components/basetypes.schema.json#/$defs/uuid" }
+                    }
+                }
+            }
         },
         "status": {
             "type": "string",
