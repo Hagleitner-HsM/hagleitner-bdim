@@ -35,10 +35,12 @@
             "$ref": "../components/basetypes.schema.json#/$defs/phoneE164",
             "description": "Phone number 2"
         },
-        "isReseller": {
-            "type": "boolean",
-            "description": "If true, the customer is a reseller, and can therefore have sub-customers. A customer can become a reseller, but a reseller cannot be converted back to a regular customer.",
-            "default": false
+        "roles": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["reseller", "invoiceRecipient", "hierarchyParent", "responsibilityCenter", "conditionOwner"] },
+            "uniqueItems": true,
+            "description": "Roles assigned to the customer",
+            "minItems": 1
         },
         "customerRelations": {
             "type": "object",

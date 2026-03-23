@@ -9,7 +9,7 @@
     "invoicing": "invoicing@acme.com",
     "work": "office@acme.com"
   },
-  "isReseller": true,
+  "roles": ["reseller"],
   "customerRelations": {
     "reseller": {
       "anchestorCustomerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def"
