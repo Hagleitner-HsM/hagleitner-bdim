@@ -15,7 +15,7 @@
         "id": {
             "$ref": "../components/basetypes.schema.json#/$defs/uuid"
         },
-        "erpCustomerId": {
+        "erpId": {
             "type": "string",
             "pattern": "^[A-Z0-9]{1,20}$"
         },
@@ -39,6 +39,20 @@
             "$ref": "../components/basetypes.schema.json#/$defs/phoneE164",
             "description": "Phone number 2"
         },
+        "emailAddresses": {
+            "type": "object",
+            "properties": {
+                "primary": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "orderConfirmation":   { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "invoice": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "invoiceCc": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "paymentReminder": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
+                "paymentReminderCc": { "$ref": "../components/basetypes.schema.json#/$defs/email"},
+                "shippingAdvice": { "$ref": "../components/basetypes.schema.json#/$defs/email"}
+            },
+            "unevaluatedProperties": false,
+            "minProperties": 1
+        },        
         "status": {
             "type": "string",
             "enum": ["active", "deleted"],
@@ -100,20 +114,7 @@
                 }
             }
         },
-        "emailAddresses": {
-            "type": "object",
-            "properties": {
-                "primary": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "orderConfirmation":   { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "invoice": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "invoiceCc": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "paymentReminder": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "paymentReminderCc": { "$ref": "../components/basetypes.schema.json#/$defs/email"},
-                "shippingAdvice": { "$ref": "../components/basetypes.schema.json#/$defs/email"}
-            },
-            "unevaluatedProperties": false,
-            "minProperties": 1
-        },
+
         "contentHash": {
             "$ref": "../components/basetypes.schema.json#/$defs/contentHash"
         }

@@ -9,28 +9,46 @@
 * customer.update
 * customer.setstatus
 
+## Property documentation, validation rules.
 
+### `id`
+We use a UUID since the ownership of the customer entity will change in future, and in the transition phase multiple systems will provide customers (namely BC and HsM), therfore a UUID is favored over a simple sequential integer IDs. Additionally BC already has a UUID for each customer (and for each tenant).
 
-
-## Validation rules & notes
-
-### customerId
-We use a uuid since the ownership of the customer entity will change, and in the transition phase multiple systems will provide customers (namely BC and HsM), therfore a uuid is favored over a simple sequential integer ID. Additionally BC already has a uuid for each customer (and for each tenant).
-
-### erpCustomerId
+### `erpId`
 This is an ID that is only useful in the context of the ERP, but be still store it in the CRM,
 since it easens the communication. E.g. if we have multiple customer with similar name and address, this ID is used in internal communications.
 
-### roles
-Instead of using flags like isReseller, roles provide a more abstract and extensible model for
-designating customers to one or more roles, this also relates to role-spcific models.
+#### TODOS
+* Define exact regex for the erpId
+* Introduce erpId as basetype schema
+
+### `name1`, `name2`, `name3`
+
+### `phoneNumber1`, `phoneNumber2`
+#### TODOS
+* Reevaluate this model with CRM-experts
+
+### `emailAddresses{}`
+We use an object containing multiple email address properties, each of them having a defined semantic.
+
+#### TODO
+* Isn't this more ERP, should we not just have the primary-email address in CRM?
+
+### `roles[]`
+Instead of using ìndividual flags like `isReseller`, roles provide a more abstract and extensible model for
+associating customers with one or more roles. Roles might also have role-spcific data models, which—if necessary—are modelled as separate entities.
+
+#### TODOS
+* Define the actual roles
+* Discuss using roles as the necessary flag to allow adding descendants for specific customer relationship types
 
 ### block
 * ERP: status = Freigabestatus
 * ERP: blockedInERP: 0: not blocked, 1: blocked for delivery but invoiding still possible, 2: blocked for Invoicing (), 3: completely blocked
 * ERP:BlockreasonCode
 * ERP: requestForBlockERP (Sperranfrage pending)
-
+#### TODOS:
+* Exact definition of block 
 
 
 ### Customer relations
