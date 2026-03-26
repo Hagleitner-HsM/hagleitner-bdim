@@ -53,11 +53,31 @@
             "unevaluatedProperties": false,
             "minProperties": 1
         },        
-        "status": {
+        "lifeCycleStatus": {
             "type": "string",
             "enum": ["active", "deleted"],
             "description": "The status of the customer"
         },
+        "languageTag": {
+            "type": "string",
+            "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z]{2}|\\-[A-Za-z]{4})?$",
+            "description": "A BCP 47 language tag that identifies the language context, often including region or script. The locale tag is used as the key for resolving a locale or culture with concrete formatting conventions."
+        },
+        "timezone": {
+            "type": "string",
+            "pattern": "^[A-Za-z]+/[A-Za-z_]+(?:/[A-Za-z_]+)?$",
+            "description": "The IANA time zone identifier representing the customer's time zone, such as 'America/New_York' or 'Europe/Berlin'."
+        },
+        "avatar": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the customer's avatar image."
+        },
+        "vatId": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}[A-Z0-9]+$",
+            "description": "The customer's VAT identification number, starting with a two-letter country code followed by alphanumeric characters."
+        },  
         "roles": {
             "type": "array",
             "items": { "type": "string", "enum": ["reseller", "invoiceRecipient", "hierarchyParent", "responsibilityCenter", "conditionOwner"] },
@@ -114,7 +134,11 @@
                 }
             }
         },
-
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "RFC 3339 date-time when the customer was first created in the owning system."
+        },
         "contentHash": {
             "$ref": "../components/basetypes.schema.json#/$defs/contentHash"
         }
