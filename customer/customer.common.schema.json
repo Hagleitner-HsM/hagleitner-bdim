@@ -7,8 +7,10 @@
     "required": [
         "id",
         "name1",
-        "status",
+        "lifeCycleStatus",
         "customerRelations",
+        "languageTag",
+        "createdAt",
         "contentHash"
     ],
     "properties": {
@@ -16,7 +18,7 @@
             "$ref": "../components/basetypes.schema.json#/$defs/uuid"
         },
         "erpId": {
-            "type": "string",
+            "type": ["string", "null"],
             "pattern": "^[A-Z0-9]{1,20}$"
         },
         "name1": {
@@ -24,31 +26,31 @@
             "maxLength": 100
         },
         "name2": {
-            "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
+            "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 50
         },
         "name3": {
-            "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
+            "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 30
         },
         "phoneNumber1": {
-            "$ref": "../components/basetypes.schema.json#/$defs/phoneE164",
+            "$ref": "../components/basetypes.schema.json#/$defs/phoneE164OrNull",
             "description": "Phone number 1"
         },
         "phoneNumber2": {
-            "$ref": "../components/basetypes.schema.json#/$defs/phoneE164",
+            "$ref": "../components/basetypes.schema.json#/$defs/phoneE164OrNull",
             "description": "Phone number 2"
         },
         "emailAddresses": {
             "type": "object",
             "properties": {
-                "primary": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "orderConfirmation":   { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "invoice": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "invoiceCc": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "paymentReminder": { "$ref": "../components/basetypes.schema.json#/$defs/email" },
-                "paymentReminderCc": { "$ref": "../components/basetypes.schema.json#/$defs/email"},
-                "shippingAdvice": { "$ref": "../components/basetypes.schema.json#/$defs/email"}
+                "primary": { "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull" },
+                "orderConfirmation":   { "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull" },
+                "invoice": { "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull" },
+                "invoiceCc": { "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull" },
+                "paymentReminder": { "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull" },
+                "paymentReminderCc": { "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull"},
+                "shippingAdvice": { "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull"}
             },
             "unevaluatedProperties": false,
             "minProperties": 1
@@ -56,7 +58,8 @@
         "lifeCycleStatus": {
             "type": "string",
             "enum": ["active", "deleted"],
-            "description": "The status of the customer"
+            "description": "The status of the customer",
+            "default": "active"
         },
         "languageTag": {
             "type": "string",
@@ -66,15 +69,16 @@
         "timezone": {
             "type": "string",
             "pattern": "^[A-Za-z]+/[A-Za-z_]+(?:/[A-Za-z_]+)?$",
-            "description": "The IANA time zone identifier representing the customer's time zone, such as 'America/New_York' or 'Europe/Berlin'."
+            "description": "The IANA time zone identifier representing the customer's time zone, such as 'America/New_York' or 'Europe/Berlin'.",
+            "default": "Etc/UTC"
         },
         "avatar": {
-            "type": "string",
+            "type": ["string", "null"],
             "format": "uri",
             "description": "URL to the customer's avatar image."
         },
         "vatId": {
-            "type": "string",
+            "type": ["string", "null"],
             "pattern": "^[A-Z]{2}[A-Z0-9]+$",
             "description": "The customer's VAT identification number, starting with a two-letter country code followed by alphanumeric characters."
         },  
@@ -95,13 +99,10 @@
                 "reseller": {
                     "type": "object",
                     "unevaluatedProperties": false,
-                    "required": ["anchestorCustomerId"],
+                    "required": ["ancestorCustomerId"],
                     "properties": {
-                        "anchestorCustomerId": {
-                            "oneOf": [
-                                { "$ref": "../components/basetypes.schema.json#/$defs/uuid" },
-                                { "type": "null" }
-                            ]
+                        "ancestorCustomerId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull"
                         },
                         "erpTenantId": {
                             "$ref": "../components/basetypes.schema.json#/$defs/uuid"
@@ -111,25 +112,31 @@
                 "invoice": {
                     "type": "object",
                     "unevaluatedProperties": false,
-                    "required": ["anchestorCustomerId"],
+                    "required": ["ancestorCustomerId"],
                     "properties": {
-                        "anchestorCustomerId": { "$ref": "../components/basetypes.schema.json#/$defs/uuid" }
+                        "ancestorCustomerId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull"
+                        }
                     }
                 },
                 "condition": {
                     "type": "object",
                     "unevaluatedProperties": false,
-                    "required": ["anchestorCustomerId"],
+                    "required": ["ancestorCustomerId"],
                     "properties": {
-                        "anchestorCustomerId": { "$ref": "../components/basetypes.schema.json#/$defs/uuid" }
+                        "ancestorCustomerId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull"
+                        }
                     }
                 },
                 "hierarchy": {
                     "type": "object",
                     "unevaluatedProperties": false,
-                    "required": ["anchestorCustomerId"],
+                    "required": ["ancestorCustomerId"],
                     "properties": {
-                        "anchestorCustomerId": { "$ref": "../components/basetypes.schema.json#/$defs/uuid" }
+                        "ancestorCustomerId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull"
+                        }
                     }
                 }
             }

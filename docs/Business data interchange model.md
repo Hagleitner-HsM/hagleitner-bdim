@@ -15,3 +15,12 @@ Guidelines:
 - All properties present in the payload, including nested objects and arrays, are included.
 - A stable, deterministic serialization is required (sorted object keys, consistent number and date formats, no insignificant whitespace).
 - Use a SHA-256 as single algorithm across systems
+
+## Strings and nulls
+String properties follow one of two nullability conventions, whether defined via a shared base type (e.g. singleLineText, singleLineTextOrNull) or declared inline in the schema (e.g. "type": ["string", "null"]). 
+
+Required properties use a non-nullable type and must always carry a valid, non-empty value. 
+
+Optional properties use a nullable type and can appear in one of three states: omitted (key not present), set to a valid non-empty string, or explicitly set to null. 
+
+Sending null is the canonical way for a client to clear a previously set value; empty strings are never permitted, as all string types enforce a minimum length or pattern constraints that reject them. This ensures a clear semantic distinction between "no value" (null or key absent) and "has a value" (always a valid, non-empty string).

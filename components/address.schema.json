@@ -4,27 +4,29 @@
     "description": "Address",
     "type": "object",
     "required": [
-        "address1",
-        "zipCode",
         "city",
         "countryCode"
     ],
     "properties": {
         "address1": {
-            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 100
         },
         "address2": {
-            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 50
         },
-        "zipCode": {
-            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+        "postalCode": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 20
         },
         "city": {
             "$ref": "basetypes.schema.json#/$defs/singleLineText",
             "maxLength": 30
+        },
+        "stateOrProvince": {
+            "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
+            "maxLength": 50
         },
         "countryCode": {
             "type": "string",

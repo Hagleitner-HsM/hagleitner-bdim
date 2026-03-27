@@ -5,6 +5,11 @@
     "type": "object",
     "$defs": {
         "singleLineText": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^\\u0000-\\u001F\\u007F\\s](?:[^\\u0000-\\u001F\\u007F]*[^\\u0000-\\u001F\\u007F\\s])?$"
+        },
+        "singleLineTextOrNull": {
             "type": ["string", "null"],
             "minLength": 1,
             "pattern": "^[^\\u0000-\\u001F\\u007F\\s](?:[^\\u0000-\\u001F\\u007F]*[^\\u0000-\\u001F\\u007F\\s])?$"
@@ -13,14 +18,18 @@
             "type": "string",
             "format": "uuid"
         },
-        "phoneE164": {
+        "phoneE164OrNull": {
             "type": ["string", "null"],
             "description": "Phone number formatted as E.164",
             "pattern": "^\\+[1-9]\\d{1,14}$"
         },
-        "email": {
-            "type": "string",
+        "emailOrNull": {
+            "type": ["string", "null"],
             "format": "email"
+        },
+        "uuidOrNull": {
+            "type": ["string", "null"],
+            "format": "uuid"
         },
         "contentHash": {
             "type": "string",

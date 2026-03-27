@@ -13,8 +13,8 @@ This is an ID that is only useful in the context of the ERP, but be still store 
 
 #### TODOS
 * Is the ERP Id the same as the customer-number in HsM?
-* Is the ERP Id unique per tenant in the ERP -> then it should be unique per reseller in the CRm
-* Define exact regex for the erpId
+* Is the ERP Id unique per tenant in the ERP -> then it should be unique per reseller in the CRM
+* Define exact regex for the erpId (similar to singleLineText)
 * Introduce erpId as basetype schema
 
 ### `name1`, `name2`, `name3`
@@ -32,50 +32,84 @@ We use an object containing multiple email address properties, each of them havi
 
 #### TODO
 * Isn't this more ERP, should we not just have the primary-email address in CRM?
+* There is a specific logic in the ERP system when to use what email address and also what to fallback to, in case a needed address is not filled.
+
+### `lifeCycleStatus`
+
+#### TODO
+* Life-cycle status or state/states: State/states help in singular plural
+* What life-cycle states do we realy have
+* Life-cylce status changes may have rules
+
+### `languageTag`
+While this is the BCP47 language tag, it is also used to derive the locale or culture with formatting conventions.
+
+### `timezone`
+Only canonical IANA timeZones are allowed
+
+### `avatar`
+A URL that points to the avatar image resource.
+
+#### TODO
+* Who is owner
+* Specify image format
+* How to protect? SAS token?
+
+### `vatId`
 
 ### `roles[]`
 Instead of using ìndividual flags like `isReseller`, roles provide a more abstract and extensible model for
 associating customers with one or more roles. Roles might also have role-spcific data models, which—if necessary—are modelled as separate entities.
 
+Candidates:
+
+* Reseller:
+* InvoiceRecipient
+* ConditionOwner
+* ResponsibilityCenter
+* HierarchyParent
+
 #### TODOS
 * Define the actual roles
 * Discuss using roles as the necessary flag to allow adding descendants for specific customer relationship types
 
-### `block` (not yet part of model)
-* ERP: status = Freigabestatus
-* ERP: blockedInERP: 0: not blocked, 1: blocked for delivery but invoiding still possible, 2: blocked for Invoicing (), 3: completely blocked
-* ERP:BlockreasonCode
-* ERP: requestForBlockERP (Sperranfrage pending)
-#### TODOS:
-* Exact definition of block 
+### `customerRelations`
 
-
-### Customer relations
-
-#### Reseller relationship
+#### `reseller`
 * Can only point to customers, that have the `reseller` role
 * Must not be null except for one customer (the root customer)
 * Must not form loops
 * Must not be modified after creation
 
-### Role changes
+##### Role changes
 * Reseller role cannot be removed the customer has linked sub-customers
 
-## Things to discuss
-* `status`: what is an active custoemer, what is inactive, how do we handle deleted.
-* `deleted`
-* `blocking`: digitaleService, WebShop, ...
+## Properties not yet in the schema
+### `customerCode`
+E.g. HHAT. A code uniquely identifying a customer. 
+
+#### TODO
+* May also be limited to resellers only, but then would be part of the customer/reseller profile
+
+### `block` (not yet part of model)
+* ERP: status = Freigabestatus: Is this needed any where?
+* ERP: blockedInERP: 0: not blocked, 1: blocked for delivery but invoiding still possible, 2: blocked for Invoicing (), 3: completely blocked
+* ERP:BlockreasonCode
+* ERP: requestForBlockERP (block pending)
+* Who defines "CanUseDigitalServices", "CanOrder", ...
+#### TODOS:
+* Exact definition of block 
+
 * `customerDisplayName` Preferred human-readable customer name for display in user interfaces; may be derived from name1, name2, and name3 if not explicitly maintained.
+
 * `IsLead` or some kind of customer classification would make sense for other tools that only want to work with "active" customers.
+
+## General questions and todos
+
 * The `customer` in our model is a very generic entity. Spezializations of a customer might need additional properties. In that case we use role profiles e.g. `customerResellerProfile` to communicate additional properties for that role.
 * Email addresses as specific email properties: pro: explicit, con: new types need contract change (but as they convey meaning, they anyway have to.)
-* `resellerCode` - unique code identifying a customer like HHAT. Coud be part of the `customerResellerProfile` 
-* `isReseller` flag, same pattern for all other relationships?
-* `address.latitude`, `address.longitude`: seems widely accepted that you shoud use geographic system with lat, long not a projected.
 * `geolocationQuality`: Probably not relevant in the CRM, keep it in the FLS if possible (like name4 in hsm)
-* `responsibilityCenter` could be modelled as a customer with a responsibilityCenter role, plus a customer relationship
-* `customer.status` separate from deleted flag (to have one common interface.)
+* `responsibilityCenter` could be modelled as a customer with a responsibilityCenter role, plus a customer relationship.
 
-
-# Sequence
+## Sequence
 * Customer creation shall be done without any relations other thatn the reseller relationship, all other relationships are created using a separate entity `customerRelation`

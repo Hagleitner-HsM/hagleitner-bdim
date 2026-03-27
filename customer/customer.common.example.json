@@ -7,32 +7,43 @@
   "phoneNumber1": "+431234567890",
   "phoneNumber2": "+431234567891",
   "emailAddresses": {
-    "primary": "invoicing@acme.com",
-    "invoice": "office@acme.com"
+    "primary": "office@acme.com",
+    "orderConfirmation": "orders@acme.com",
+    "invoice": "invoicing@acme.com",
+    "invoiceCc": "accounting@acme.com",
+    "paymentReminder": "finance@acme.com",
+    "paymentReminderCc": null,
+    "shippingAdvice": "warehouse@acme.com"
   },
+  "lifeCycleStatus": "active",
+  "languageTag": "de-AT",
+  "timezone": "Europe/Vienna",
+  "avatar": "https://cdn.acme.com/avatars/acme-corp.png",
+  "vatId": "ATU12345678",
   "roles": ["reseller"],
   "customerRelations": {
     "reseller": {
-      "anchestorCustomerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def",
+      "ancestorCustomerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def",
       "erpTenantId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab"
     },
     "invoice": {
-      "anchestorCustomerId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab"
+      "ancestorCustomerId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab"
     },
     "condition": {
-      "anchestorCustomerId": "f4e5d6c7-b8a9-0d1e-2f34-56789abcdef0"
+      "ancestorCustomerId": "f4e5d6c7-b8a9-0d1e-2f34-56789abcdef0"
     },
     "hierarchy": {
-      "anchestorCustomerId": "e3c4d5b6-a7c8-9d0e-1f23-456789abcdef"
+      "ancestorCustomerId": "e3c4d5b6-a7c8-9d0e-1f23-456789abcdef"
     }
   },
   "address1": "Musterstraße 1",
   "address2": null,
+  "postalCode": "9000",
   "city": "Innsbruck",
-  "zipCode": "9000",
-  "status": "active",
+  "stateOrProvince": null,
   "countryCode": "AT",
   "latitude": 47.202778,
   "longitude": 14.280833,
+  "createdAt": "2025-03-15T08:30:00Z",
   "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 }
