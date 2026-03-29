@@ -3,6 +3,13 @@ The Business Data Interchange Model (BDIM) defines a shared contract for exchang
 
 This repository contains JSON schemas and JSON sample files for the common schemas, as well as JSON schemas and JSON examples for individual messages.
 
+## Versioning 
+The Business Data Interchange Model (BDIM) is versioned at the level of the entire published schema set, not at the level of individual entity schemas. Each published version contains all schemas and all accompanying documentation that belong to the same contractual baseline.
+
+A published BDIM version is stored in a dedicated version folder in the Git repository, for example: `/bdim/v1.2/`
+
+This folder contains the complete set of JSON Schemas and the corresponding Markdown documentation for that version. The same structure is used for publication, so all artifacts of a version are published under a matching URL path, for example: `https://schema.hagleitner.com/bdim/v1.2/...`
+
 ## Development environment
 To view and modify the JSON schemas, JSON example files, and documentation Markdown files, the following environment is recommended:
 * Visual Studio Code
@@ -10,6 +17,3 @@ To view and modify the JSON schemas, JSON example files, and documentation Markd
 * Visual Studio Extension: JSON Schema Viewer
 * Visual Studio Extension: Markdown preview enhanced
 
-## Publication
-* JSON schemas and example files will eventually be hosted on http://schema.hagleitner.digital/bdim
-* Markdown documentation will eventually be migrated to Paligo and will be hosted as part of docs.hagleitner.com

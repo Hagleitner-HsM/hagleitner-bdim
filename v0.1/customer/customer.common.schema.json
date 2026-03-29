@@ -1,0 +1,234 @@
+{
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "Customer",
+    "type": "object",
+    "unevaluatedProperties": false,
+    "required": [
+        "id",
+        "name1",
+        "lifeCycleStatus",
+        "customerRelations",
+        "languageTag",
+        "createdAt",
+        "contentHash"
+    ],
+    "properties": {
+        "id": {
+            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+            "description": "UUID uniquely identifying the customer."
+        },
+        "erpId": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "pattern": "^[A-Z0-9]{1,20}$",
+            "description": "ERP system identifier, useful for internal communication when multiple customers share similar names."
+        },
+        "name1": {
+            "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
+            "maxLength": 100,
+            "description": "Primary customer name line."
+        },
+        "name2": {
+            "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
+            "maxLength": 50,
+            "description": "Secondary customer name line."
+        },
+        "name3": {
+            "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
+            "maxLength": 30,
+            "description": "Tertiary customer name line."
+        },
+        "phoneNumber1": {
+            "$ref": "../components/basetypes.schema.json#/$defs/phoneE164OrNull",
+            "description": "Phone number 1"
+        },
+        "phoneNumber2": {
+            "$ref": "../components/basetypes.schema.json#/$defs/phoneE164OrNull",
+            "description": "Phone number 2"
+        },
+        "emailAddresses": {
+            "type": "object",
+            "description": "Email addresses with defined semantics for different communication purposes.",
+            "properties": {
+                "primary": {
+                    "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull",
+                    "description": "Primary email address of the customer."
+                },
+                "orderConfirmation": {
+                    "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull",
+                    "description": "Email address for order confirmations."
+                },
+                "invoice": {
+                    "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull",
+                    "description": "Email address for invoices."
+                },
+                "invoiceCc": {
+                    "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull",
+                    "description": "CC email address for invoices."
+                },
+                "paymentReminder": {
+                    "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull",
+                    "description": "Email address for payment reminders."
+                },
+                "paymentReminderCc": {
+                    "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull",
+                    "description": "CC email address for payment reminders."
+                },
+                "shippingAdvice": {
+                    "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull",
+                    "description": "Email address for shipping advice notifications."
+                }
+            },
+            "unevaluatedProperties": false,
+            "minProperties": 1
+        },
+        "lifeCycleStatus": {
+            "type": "string",
+            "enum": [
+                "active",
+                "deleted"
+            ],
+            "description": "The status of the customer",
+            "default": "active"
+        },
+        "languageTag": {
+            "type": "string",
+            "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z]{2}|\\-[A-Za-z]{4})?$",
+            "description": "A BCP 47 language tag that identifies the language context, often including region or script. The locale tag is used as the key for resolving a locale or culture with concrete formatting conventions."
+        },
+        "timezone": {
+            "type": "string",
+            "pattern": "^[A-Za-z]+/[A-Za-z_]+(?:/[A-Za-z_]+)?$",
+            "description": "The IANA time zone identifier representing the customer's time zone, such as 'America/New_York' or 'Europe/Berlin'.",
+            "default": "Etc/UTC"
+        },
+        "avatar": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "uri",
+            "description": "URL to the customer's avatar image."
+        },
+        "taxIdentificationNumber": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "pattern": "^[A-Z]{2}[A-Z0-9]+$",
+            "description": "The customer's VAT identification number, starting with a two-letter country code followed by alphanumeric characters."
+        },
+        "roles": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "reseller",
+                    "invoiceRecipient",
+                    "hierarchyParent",
+                    "responsibilityCenter",
+                    "conditionOwner"
+                ]
+            },
+            "uniqueItems": true,
+            "description": "Roles assigned to the customer",
+            "minItems": 1
+        },
+        "customerRelations": {
+            "type": "object",
+            "description": "Defines the customer's relationships to other customers.",
+            "unevaluatedProperties": false,
+            "required": [
+                "reseller"
+            ],
+            "properties": {
+                "reseller": {
+                    "type": "object",
+                    "description": "Reseller relationship; the ancestor must have the reseller role.",
+                    "unevaluatedProperties": false,
+                    "required": [
+                        "ancestorCustomerId"
+                    ],
+                    "properties": {
+                        "ancestorCustomerId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull",
+                            "description": "UUID of the ancestor reseller customer, null only for the root customer."
+                        },
+                        "erpTenantId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+                            "description": "UUID of the ERP tenant associated with this reseller relationship."
+                        }
+                    }
+                },
+                "invoice": {
+                    "type": "object",
+                    "description": "Invoice recipient relationship.",
+                    "unevaluatedProperties": false,
+                    "required": [
+                        "ancestorCustomerId"
+                    ],
+                    "properties": {
+                        "ancestorCustomerId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull",
+                            "description": "UUID of the ancestor invoice recipient customer."
+                        }
+                    }
+                },
+                "condition": {
+                    "type": "object",
+                    "description": "Condition owner relationship.",
+                    "unevaluatedProperties": false,
+                    "required": [
+                        "ancestorCustomerId"
+                    ],
+                    "properties": {
+                        "ancestorCustomerId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull",
+                            "description": "UUID of the ancestor condition owner customer."
+                        }
+                    }
+                },
+                "hierarchy": {
+                    "type": "object",
+                    "description": "Hierarchy parent relationship.",
+                    "unevaluatedProperties": false,
+                    "required": [
+                        "ancestorCustomerId"
+                    ],
+                    "properties": {
+                        "ancestorCustomerId": {
+                            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull",
+                            "description": "UUID of the ancestor hierarchy parent customer."
+                        }
+                    }
+                }
+            }
+        },
+        "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "RFC 3339 date-time when the customer was first created in the owning system."
+        },
+        "contentHash": {
+            "$ref": "../components/basetypes.schema.json#/$defs/contentHash",
+            "description": "Hash of the customer content for change detection."
+        }
+    },
+    "dependentRequired": {
+        "name2": [
+            "name1"
+        ],
+        "name3": [
+            "name2",
+            "name1"
+        ]
+    },
+    "allOf": [
+        {
+            "$ref": "../components/address.schema.json"
+        }
+    ]
+}

@@ -18,12 +18,14 @@ This is an ID that is only useful in the context of the ERP, but be still store 
 * Introduce erpId as basetype schema
 
 ### `name1`, `name2`, `name3`
-It was decided that the customer display name is not part of the common model, but it rendered individually on each service.
+Name of the customer, split in up to 3 parts for printing postal addresses
 
 #### TODO
 * Decide if the owner shall really not provide a concatenated name.
 
 ### `phoneNumber1`, `phoneNumber2`
+Phone numbers of the customer
+
 #### TODOS
 * Reevaluate this model with CRM-experts. The current implementation is jsut 2 semantic-less numbers, alternative: Array of phone numbers objects, with type/tag.
 
@@ -31,15 +33,15 @@ It was decided that the customer display name is not part of the common model, b
 We use an object containing multiple email address properties, each of them having a defined semantic.
 
 #### TODO
-* Isn't this more ERP, should we not just have the primary-email address in CRM?
+* Isn't this more ERP, should we not just have the primary-email address in CRM? Or an arry of email addresses, with a tag or description?
 * There is a specific logic in the ERP system when to use what email address and also what to fallback to, in case a needed address is not filled.
 
 ### `lifeCycleStatus`
 
 #### TODO
-* Life-cycle status or state/states: State/states help in singular plural
+* Some validation rules depend on the lifeCycleStatus, e.g. a unique customerNumber is only unique within active customers
+* Changing from deleted to active is not always possible, e.g. uniqueness constraints must be checked
 * What life-cycle states do we realy have
-* Life-cylce status changes may have rules
 
 ### `languageTag`
 While this is the BCP47 language tag, it is also used to derive the locale or culture with formatting conventions.
@@ -51,15 +53,19 @@ Only canonical IANA timeZones are allowed
 A URL that points to the avatar image resource.
 
 #### TODO
-* Who is owner
-* Specify image format
-* How to protect? SAS token?
+* Probably skip for version 0.1, but discuss with Orbis if this is something they can theortically provide, or if we anyway have to implement this in another sytem
+* How to protect? SAS token, Rest Endpoint?
+* Specify image format, auotmatic resizing, etc.
 
-### `vatId`
+### `taxIdentificationNumber`
+Rationale:
+* VAT is Europe only
+
+#### TODO
+* Validation must be done in code based on country code. 
 
 ### `roles[]`
-Instead of using ìndividual flags like `isReseller`, roles provide a more abstract and extensible model for
-associating customers with one or more roles. Roles might also have role-spcific data models, which—if necessary—are modelled as separate entities.
+Instead of using individual flags like `isReseller`, roles provide a more abstract and extensible model for associating customers with one or more roles. Roles might also have role-spcific data models, which—if necessary—are modelled as separate entities.
 
 Candidates:
 
@@ -90,6 +96,7 @@ E.g. HHAT. A code uniquely identifying a customer.
 
 #### TODO
 * May also be limited to resellers only, but then would be part of the customer/reseller profile
+* May be a uniqueCustomerAlias, theoretically available for all customers
 
 ### `block` (not yet part of model)
 * ERP: status = Freigabestatus: Is this needed any where?
@@ -112,4 +119,6 @@ E.g. HHAT. A code uniquely identifying a customer.
 * `responsibilityCenter` could be modelled as a customer with a responsibilityCenter role, plus a customer relationship.
 
 ## Sequence
-* Customer creation shall be done without any relations other thatn the reseller relationship, all other relationships are created using a separate entity `customerRelation`
+* Customer creation shall be done without any relations other than the reseller relationship, all other relationships are created using a separate entity `customerRelation`
+* Traverse customers recursively with a "preorder depth-first traversal" strategy. 
+* On each depth-level sort customers by [Name1, Name2, Name3, id]

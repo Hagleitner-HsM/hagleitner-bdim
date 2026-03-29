@@ -19,7 +19,7 @@
   "languageTag": "de-AT",
   "timezone": "Europe/Vienna",
   "avatar": "https://cdn.acme.com/avatars/acme-corp.png",
-  "vatId": "ATU12345678",
+  "taxIdentificationNumber": "ATU12345678",
   "roles": ["reseller"],
   "customerRelations": {
     "reseller": {
