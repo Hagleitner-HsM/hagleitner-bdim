@@ -18,14 +18,20 @@
             "$ref": "../components/basetypes.schema.json#/$defs/uuid",
             "description": "UUID uniquely identifying the customer."
         },
-        "erpId": {
+        "customerNumber": {
             "type": [
                 "string",
                 "null"
             ],
-            "pattern": "^[A-Z0-9]{1,20}$",
-            "description": "ERP system identifier, useful for internal communication when multiple customers share similar names."
+            "pattern": "^[A-Z0-9\\-_]{1,20}$",
+            "description": "Customer number uniquely identifies a customer within a reseller's customer base."
         },
+
+        "erpTenantId": {
+            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+            "description": "UUID of the ERP tenant associated with this customer."
+        },
+
         "name1": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
             "maxLength": 100,
@@ -114,11 +120,7 @@
             "description": "URL to the customer's avatar image."
         },
         "taxIdentificationNumber": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "pattern": "^[A-Z]{2}[A-Z0-9]+$",
+            "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
             "description": "The customer's VAT identification number, starting with a two-letter country code followed by alphanumeric characters."
         },
         "roles": {
@@ -156,10 +158,6 @@
                         "ancestorCustomerId": {
                             "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull",
                             "description": "UUID of the ancestor reseller customer, null only for the root customer."
-                        },
-                        "erpTenantId": {
-                            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
-                            "description": "UUID of the ERP tenant associated with this reseller relationship."
                         }
                     }
                 },
@@ -212,6 +210,11 @@
             "format": "date-time",
             "description": "RFC 3339 date-time when the customer was first created in the owning system."
         },
+        "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "RFC 3339 date-time when the customer was last updated in the owning system."
+        },        
         "contentHash": {
             "$ref": "../components/basetypes.schema.json#/$defs/contentHash",
             "description": "Hash of the customer content for change detection."

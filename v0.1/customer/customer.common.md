@@ -8,43 +8,45 @@
 ### `id`
 We use a UUID since the ownership of the customer entity will change in future, and in the transition phase multiple systems will provide customers (namely BC and HsM), therfore a UUID is favored over a simple sequential integer IDs. Additionally BC already has a UUID for each customer (and for each tenant).
 
-### `erpId`
-This is an ID that is only useful in the context of the ERP, but be still store it in the CRM, since it easens the communication. E.g. if we have multiple customer with similar name and address, this ID is used in internal communications.
+### `customerNumber`
+* The customer numbe is optional
+* Customer number is unique per reseller only
+* Customer number might be defined by the reseller (i.e. not only by Hagleitner Tenants)
 
-#### TODOS
-* Is the ERP Id the same as the customer-number in HsM?
-* Is the ERP Id unique per tenant in the ERP -> then it should be unique per reseller in the CRM
-* Define exact regex for the erpId (similar to singleLineText)
-* Introduce erpId as basetype schema
-
-### `name1`, `name2`, `name3`
-Name of the customer, split in up to 3 parts for printing postal addresses
+### `erpTenantId`
+Given to make the life of the EPR easier
 
 #### TODO
-* Decide if the owner shall really not provide a concatenated name.
+* CRM must implement a logic that determines the correct tenat. Could be the 1st level reseller on the reseller relationship path.
+
+### `name1`, `name2`, `name3`
+Name of the customer, split in up to 3 parts for printing postal addresses.
+
+#### TODO
+* (CRM) Decide if the owner shall really not provide a concatenated name.
 
 ### `phoneNumber1`, `phoneNumber2`
 Phone numbers of the customer
+CRM must enforce valid phone numbers (google libphonenumber).
 
 #### TODOS
-* Reevaluate this model with CRM-experts. The current implementation is jsut 2 semantic-less numbers, alternative: Array of phone numbers objects, with type/tag.
+* (CRM) Reevaluate this model with CRM-experts. The current implementation is jsut 2 semantic-less numbers, alternative: Array of phone numbers objects, with type/tag.
 
 ### `emailAddresses{}`
 We use an object containing multiple email address properties, each of them having a defined semantic.
 
-#### TODO
-* Isn't this more ERP, should we not just have the primary-email address in CRM? Or an arry of email addresses, with a tag or description?
-* There is a specific logic in the ERP system when to use what email address and also what to fallback to, in case a needed address is not filled.
+(CRM) There is a specific logic in the ERP system when to use what email address and also what to fallback to, in case a needed address is not filled.
 
 ### `lifeCycleStatus`
 
 #### TODO
-* Some validation rules depend on the lifeCycleStatus, e.g. a unique customerNumber is only unique within active customers
-* Changing from deleted to active is not always possible, e.g. uniqueness constraints must be checked
-* What life-cycle states do we realy have
+* (CRM) Some validation rules depend on the lifeCycleStatus, e.g. a unique customerNumber is only unique within active customers
+* (CRM) Changing from deleted to active is not always possible, e.g. uniqueness constraints must be checked
+* (CRM) What life-cycle status do we realy have
+* (CRM) What happens to customer relations if the ancestor is marked as deleted
 
 ### `languageTag`
-While this is the BCP47 language tag, it is also used to derive the locale or culture with formatting conventions.
+While this is the BCP47 language tag, it is also used to derive the locale or culture with formatting conventions. 
 
 ### `timezone`
 Only canonical IANA timeZones are allowed
@@ -62,7 +64,7 @@ Rationale:
 * VAT is Europe only
 
 #### TODO
-* Validation must be done in code based on country code. 
+* (CRM) Validation must be done in code based on country code. 
 
 ### `roles[]`
 Instead of using individual flags like `isReseller`, roles provide a more abstract and extensible model for associating customers with one or more roles. Roles might also have role-spcific data models, which—if necessary—are modelled as separate entities.
@@ -75,11 +77,17 @@ Candidates:
 * ResponsibilityCenter
 * HierarchyParent
 
+##### Role changes
+* Reseller role cannot be removed the customer has linked sub-customers
+
 #### TODOS
-* Define the actual roles
-* Discuss using roles as the necessary flag to allow adding descendants for specific customer relationship types
+* (CRM) Define the actual roles
+* (CRM) Discuss using roles as the necessary flag to allow adding descendants for specific customer relationship types
 
 ### `customerRelations`
+
+#### TODOS
+Customer relations between customers under different resellers need a more deatilled discussion.
 
 #### `reseller`
 * Can only point to customers, that have the `reseller` role
@@ -87,29 +95,43 @@ Candidates:
 * Must not form loops
 * Must not be modified after creation
 
-##### Role changes
-* Reseller role cannot be removed the customer has linked sub-customers
+#### `createdAt`
+This is the max  date and time when any of the properties of this entity was created
+
+#### `updatedAt`
+This is the max  date and time when any of the properties of this entity was last changed
+
+#### `contentHash`
+Hash of the customer content for change detection.
+
 
 ## Properties not yet in the schema
+### `updatedBy`
+Would be string only, therfore troublesome with GPDR
+
 ### `customerCode`
 E.g. HHAT. A code uniquely identifying a customer. 
 
 #### TODO
+* (CRM) Is this needed
 * May also be limited to resellers only, but then would be part of the customer/reseller profile
 * May be a uniqueCustomerAlias, theoretically available for all customers
+* May be a problem with delete/undelete
 
 ### `block` (not yet part of model)
 * ERP: status = Freigabestatus: Is this needed any where?
-* ERP: blockedInERP: 0: not blocked, 1: blocked for delivery but invoiding still possible, 2: blocked for Invoicing (), 3: completely blocked
+* ERP: blockedInERP: 0: not blocked, 1: blocked for delivery but invoicing still possible, 2: blocked for Invoicing (), 3: completely blocked
 * ERP:BlockreasonCode
 * ERP: requestForBlockERP (block pending)
 * Who defines "CanUseDigitalServices", "CanOrder", ...
 #### TODOS:
 * Exact definition of block 
+* What happens if an ancestor is blocked (each realtionship)
+* What happens if the side-effects of blocking affects multiple customers, and if these side-effects are calculated in ERP
 
 * `customerDisplayName` Preferred human-readable customer name for display in user interfaces; may be derived from name1, name2, and name3 if not explicitly maintained.
 
-* `IsLead` or some kind of customer classification would make sense for other tools that only want to work with "active" customers.
+* `IsLead` or some kind of customer classification would make sense for other tools that only want to work with "active" customers. If any system other than the CRM, wants to work with leads, then this classification is necessary.
 
 ## General questions and todos
 

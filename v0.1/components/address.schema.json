@@ -26,7 +26,7 @@
         },
         "stateOrProvince": {
             "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
-            "maxLength": 50
+            "maxLength": 30
         },
         "countryCode": {
             "type": "string",

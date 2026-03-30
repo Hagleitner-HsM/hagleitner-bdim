@@ -17,3 +17,12 @@ To view and modify the JSON schemas, JSON example files, and documentation Markd
 * Visual Studio Extension: JSON Schema Viewer
 * Visual Studio Extension: Markdown preview enhanced
 
+## Entities not yet modelled:
+* User, Identity, Contact
+* ResponsibiltyCenter
+* FreeServicePeriod, FullContract
+* Service areas
+
+## Messages not yet modelled
+all
+
