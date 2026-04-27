@@ -8,8 +8,10 @@
 ### `id`
 We use a UUID since the ownership of the customer entity will change in future, and in the transition phase multiple systems will provide customers (namely BC and HsM), therfore a UUID is favored over a simple sequential integer IDs. Additionally BC already has a UUID for each customer (and for each tenant).
 
+### crmCustomerNumber
+
 ### `erpCustomerNumber`
-* The customer numbe is optional
+* The customer number is optional
 * Customer number is unique per reseller only
 * Customer number might be defined by the reseller (i.e. not only by Hagleitner Tenants)
 

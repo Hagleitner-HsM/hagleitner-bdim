@@ -1,6 +1,7 @@
 {
   "id": "b7e6a1c2-3f4d-4e2a-9b1a-123456789abc",
-  "customerNumber": "BX001",
+  "crmCustomerNumber": "A1234",
+  "erpCustomerNumber": "15988712",
   "erpTenantId": "0f1e2d3c-4b5a-6978-8091-a2b3c4d5e6f7",
   "name1": "Acme Corporation",
   "name2": "Sales Department",

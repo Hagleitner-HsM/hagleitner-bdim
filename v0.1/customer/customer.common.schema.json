@@ -1,9 +1,8 @@
 {
-    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.schema.json",
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.common.schema.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "description": "Customer",
+    "description": "This it the schema for common customer properties that are shared accoss different sytems. Entities of this schema can be owned by different source systems.",
     "type": "object",
-    "unevaluatedProperties": false,
     "required": [
         "id",
         "name1",
@@ -11,28 +10,27 @@
         "customerRelations",
         "languageTag",
         "createdAt",
-        "contentHash"
+        "contentHash",
+        "owningSystem"
     ],
     "properties": {
         "id": {
             "$ref": "../components/basetypes.schema.json#/$defs/uuid",
-            "description": "UUID uniquely identifying the customer."
+            "description": "UUID uniquely identifying the customer.",
+            "x-status": "approved"
         },
-        "erpCustomerNumber": {
-            "type": [
-                "string"
+        "owningSystem": {
+            "type": "string",
+            "enum": [
+                "CRM",
+                "ERP",
+                "HSM"
             ],
-            "pattern": "^[A-Z0-9\\-_]{1,20}$",
-            "description": "Customer number uniquely identifies a customer within a reseller's customer base."
-        },
-        "crmCustomerNumber": {
-            "type": ["integer", "null"],
-            "description": "Customer number uniquely identifies a customer. Owned by the CRM system.",
-            "minimum": 10000000
+            "description": "The system that owns the customer record. Only the owning system is allowed to set and update the content of the customer record, other systems can only read the record and may not update it. The owning system is responsible for setting the contentHash property based on the content of the customer record."
         },
         "erpTenantId": {
             "$ref": "../components/basetypes.schema.json#/$defs/uuid",
-            "description": "UUID of the ERP tenant associated with this customer."
+            "description": "UUID of the ERP tenant associated with this customer. This Id must be set by the owning system."
         },
         "name1": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
@@ -212,11 +210,7 @@
             "type": "string",
             "format": "date-time",
             "description": "RFC 3339 date-time when the customer was last updated in the owning system."
-        },        
-        "contentHash": {
-            "$ref": "../components/basetypes.schema.json#/$defs/contentHash",
-            "description": "Hash of the customer content for change detection."
-        }
+        }        
     },
     "dependentRequired": {
         "name2": [
@@ -228,8 +222,6 @@
         ]
     },
     "allOf": [
-        {
-            "$ref": "../components/address.schema.json"
-        }
+        { "$ref": "../components/address.schema.json" }
     ]
 }

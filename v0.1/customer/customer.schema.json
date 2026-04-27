@@ -1,0 +1,24 @@
+{
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "Customer",
+    "type": "object",
+    "unevaluatedProperties": false,
+    "properties": {
+        "contentHash": {
+            "$ref": "../components/basetypes.schema.json#/$defs/contentHash",
+            "description": "Hash of the customer content for change detection."
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "customer.common.schema.json"
+        },
+        {
+            "$ref": "customer.crm.schema.json"
+        },
+        {
+            "$ref": "customer.erp.schema.json"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.crm.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "CRM Customer",
+    "type": "object",
+    "required": [
+        "crmCustomerNumber"
+    ],
+    "properties": {
+        "erpCustomerNumber": {
+            "type": [
+                "string"
+            ],
+            "pattern": "^[A-Z0-9\\-_]{1,20}$",
+            "description": "Customer number uniquely identifies a customer within a reseller's customer base."
+        }
+    }
+}
