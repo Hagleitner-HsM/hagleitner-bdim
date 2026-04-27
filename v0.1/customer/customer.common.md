@@ -14,7 +14,7 @@ We use a UUID since the ownership of the customer entity will change in future, 
 * Customer number might be defined by the reseller (i.e. not only by Hagleitner Tenants)
 
 ### `erpTenantId`
-Given to make the life of the EPR easier
+Given to make the life of the EPR easier, i.e. an erp attribute stored in the BDIM.
 
 #### TODO
 * CRM must implement a logic that determines the correct tenat. Could be the 1st level reseller on the reseller relationship path.
@@ -72,11 +72,7 @@ Instead of using individual flags like `isReseller`, roles provide a more abstra
 
 Candidates:
 
-* Reseller:
-* InvoiceRecipient
-* ConditionOwner
-* ResponsibilityCenter
-* HierarchyParent
+* Reseller
 
 ##### Role changes
 * Reseller role cannot be removed the customer has linked sub-customers
@@ -149,3 +145,9 @@ E.g. HHAT. A code uniquely identifying a customer.
 * Customer creation shall be done without any relations other than the reseller relationship, all other relationships are created using a separate entity `customerRelation`
 * Traverse customers recursively with a "preorder depth-first traversal" strategy. 
 * On each depth-level sort customers by [Name1, Name2, Name3, id]
+
+# Aditional fields
+* homepage: URI
+* currencyCode: ISO 4217, default = EUR
+* shippingInstruction: Volllieferung Teillieferung (noch unklar) enum
+* 

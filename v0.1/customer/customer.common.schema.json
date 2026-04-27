@@ -34,7 +34,6 @@
             "$ref": "../components/basetypes.schema.json#/$defs/uuid",
             "description": "UUID of the ERP tenant associated with this customer."
         },
-
         "name1": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
             "maxLength": 100,
@@ -98,7 +97,7 @@
             "type": "string",
             "enum": [
                 "active",
-                "deleted"
+                "inactive"
             ],
             "description": "The status of the customer",
             "default": "active"
@@ -131,12 +130,7 @@
             "items": {
                 "type": "string",
                 "enum": [
-                    "reseller",
-                    "invoiceRecipient",
-                    "hierarchyParent",
-                    "responsibilityCenter",
-                    "conditionOwner",
-                    "shippingRecipient"
+                    "reseller"
                 ]
             },
             "uniqueItems": true,
