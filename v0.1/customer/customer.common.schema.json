@@ -18,15 +18,18 @@
             "$ref": "../components/basetypes.schema.json#/$defs/uuid",
             "description": "UUID uniquely identifying the customer."
         },
-        "customerNumber": {
+        "erpCustomerNumber": {
             "type": [
-                "string",
-                "null"
+                "string"
             ],
             "pattern": "^[A-Z0-9\\-_]{1,20}$",
             "description": "Customer number uniquely identifies a customer within a reseller's customer base."
         },
-
+        "crmCustomerNumber": {
+            "type": ["integer", "null"],
+            "description": "Customer number uniquely identifies a customer. Owned by the CRM system.",
+            "minimum": 10000000
+        },
         "erpTenantId": {
             "$ref": "../components/basetypes.schema.json#/$defs/uuid",
             "description": "UUID of the ERP tenant associated with this customer."
@@ -132,7 +135,8 @@
                     "invoiceRecipient",
                     "hierarchyParent",
                     "responsibilityCenter",
-                    "conditionOwner"
+                    "conditionOwner",
+                    "shippingRecipient"
                 ]
             },
             "uniqueItems": true,

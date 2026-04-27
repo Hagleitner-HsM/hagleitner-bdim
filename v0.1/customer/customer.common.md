@@ -8,7 +8,7 @@
 ### `id`
 We use a UUID since the ownership of the customer entity will change in future, and in the transition phase multiple systems will provide customers (namely BC and HsM), therfore a UUID is favored over a simple sequential integer IDs. Additionally BC already has a UUID for each customer (and for each tenant).
 
-### `customerNumber`
+### `erpCustomerNumber`
 * The customer numbe is optional
 * Customer number is unique per reseller only
 * Customer number might be defined by the reseller (i.e. not only by Hagleitner Tenants)
@@ -49,6 +49,7 @@ We use an object containing multiple email address properties, each of them havi
 While this is the BCP47 language tag, it is also used to derive the locale or culture with formatting conventions. 
 
 ### `timezone`
+
 Only canonical IANA timeZones are allowed
 
 ### `avatar`
@@ -135,10 +136,14 @@ E.g. HHAT. A code uniquely identifying a customer.
 
 ## General questions and todos
 
+* Bi-directional synchronization of customer data in Phase 1
 * The `customer` in our model is a very generic entity. Spezializations of a customer might need additional properties. In that case we use role profiles e.g. `customerResellerProfile` to communicate additional properties for that role.
 * Email addresses as specific email properties: pro: explicit, con: new types need contract change (but as they convey meaning, they anyway have to.)
 * `geolocationQuality`: Probably not relevant in the CRM, keep it in the FLS if possible (like name4 in hsm)
 * `responsibilityCenter` could be modelled as a customer with a responsibilityCenter role, plus a customer relationship.
+
+
+
 
 ## Sequence
 * Customer creation shall be done without any relations other than the reseller relationship, all other relationships are created using a separate entity `customerRelation`
