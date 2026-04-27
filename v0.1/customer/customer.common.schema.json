@@ -153,7 +153,7 @@
             "properties": {
                 "reseller": {
                     "type": "object",
-                    "description": "Reseller relationship; the ancestor must have the reseller role.",
+                    "description": "Reseller relationship",
                     "unevaluatedProperties": false,
                     "required": [
                         "ancestorCustomerId"
@@ -165,9 +165,9 @@
                         }
                     }
                 },
-                "invoice": {
+                "invoiceRecipient": {
                     "type": "object",
-                    "description": "Invoice recipient relationship.",
+                    "description": "Invoicing relationship",
                     "unevaluatedProperties": false,
                     "required": [
                         "ancestorCustomerId"
@@ -179,9 +179,9 @@
                         }
                     }
                 },
-                "condition": {
+                "conditionOwner": {
                     "type": "object",
-                    "description": "Condition owner relationship.",
+                    "description": "Condition relationship",
                     "unevaluatedProperties": false,
                     "required": [
                         "ancestorCustomerId"
@@ -193,9 +193,9 @@
                         }
                     }
                 },
-                "hierarchy": {
+                "parent": {
                     "type": "object",
-                    "description": "Hierarchy parent relationship.",
+                    "description": "Hierarchy relationship",
                     "unevaluatedProperties": false,
                     "required": [
                         "ancestorCustomerId"

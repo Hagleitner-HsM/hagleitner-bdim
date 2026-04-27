@@ -26,13 +26,13 @@
     "reseller": {
       "ancestorCustomerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def"
     },
-    "invoice": {
+    "invoiceRecipient": {
       "ancestorCustomerId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab"
     },
-    "condition": {
+    "conditionOwner": {
       "ancestorCustomerId": "f4e5d6c7-b8a9-0d1e-2f34-56789abcdef0"
     },
-    "hierarchy": {
+    "parent": {
       "ancestorCustomerId": "e3c4d5b6-a7c8-9d0e-1f23-456789abcdef"
     }
   },
