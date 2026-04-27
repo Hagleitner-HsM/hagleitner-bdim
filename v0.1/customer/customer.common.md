@@ -16,8 +16,7 @@ We use a UUID since the ownership of the customer entity will change in future, 
 ### `erpTenantId`
 Given to make the life of the EPR easier, i.e. an erp attribute stored in the BDIM.
 
-#### TODO
-* CRM must implement a logic that determines the correct tenat. Could be the 1st level reseller on the reseller relationship path.
+The CRM must implement a logic that determines the correct tenat. Could be the 1st level reseller on the reseller relationship path.
 
 ### `name1`, `name2`, `name3`
 Name of the customer, split in up to 3 parts for printing postal addresses.
