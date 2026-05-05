@@ -1,4 +1,4 @@
-# Customer
+# Customer.erp
 
 > [!NOTE]
 > This common entity model is not a message contract; message-specific schemas must define the rules of each interaction.

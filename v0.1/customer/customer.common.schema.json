@@ -23,14 +23,15 @@
             "type": "string",
             "enum": [
                 "CRM",
-                "ERP",
-                "HSM"
+                "ERP"
             ],
-            "description": "The system that owns the customer record. Only the owning system is allowed to set and update the content of the customer record, other systems can only read the record and may not update it. The owning system is responsible for setting the contentHash property based on the content of the customer record."
+            "description": "The system that owns the customer record. Only the owning system is allowed to set and update the content of the customer record, other systems can only read the record and may not update it. The owning system is responsible for setting the contentHash property based on the content of the customer record.",
+            "x-status": "approved"
         },
         "erpTenantId": {
             "$ref": "../components/basetypes.schema.json#/$defs/uuid",
-            "description": "UUID of the ERP tenant associated with this customer. This Id must be set by the owning system."
+            "description": "UUID of the ERP tenant associated with this customer. This Id must be set by the owning system.",
+            "x-status": "inDiscussion1"
         },
         "name1": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",

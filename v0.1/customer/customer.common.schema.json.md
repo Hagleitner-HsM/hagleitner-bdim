@@ -1,6 +1,7 @@
 # Customer
 
 > [!NOTE]
+        "customerRelations",
 > This common entity model is not a message contract; message-specific schemas must define the rules of each interaction.
 
 ## Property documentation, validation rules.
@@ -8,6 +9,14 @@
 ### `id`
 We use a UUID since the ownership of the customer entity will change in future, and in the transition phase multiple systems will provide customers (namely BC and HsM), therfore a UUID is favored over a simple sequential integer IDs. Additionally BC already has a UUID for each customer (and for each tenant).
 
+### `owningSystem` 
+The owning system is used to distinguish different owners of the common schema. The ownership is allowed to change (e.g. phase 2).
+
+### `erpTenantId`
+Given to make the life of the ERP easier, i.e. an erp attribute stored in the BDIM.
+
+The CRM must implement a logic that determines the correct tenat. Could be the 1st level reseller on the reseller relationship path.
+ 
 ### crmCustomerNumber
 
 ### `erpCustomerNumber`
@@ -15,10 +24,7 @@ We use a UUID since the ownership of the customer entity will change in future, 
 * Customer number is unique per reseller only
 * Customer number might be defined by the reseller (i.e. not only by Hagleitner Tenants)
 
-### `erpTenantId`
-Given to make the life of the EPR easier, i.e. an erp attribute stored in the BDIM.
 
-The CRM must implement a logic that determines the correct tenat. Could be the 1st level reseller on the reseller relationship path.
 
 ### `name1`, `name2`, `name3`
 Name of the customer, split in up to 3 parts for printing postal addresses.
