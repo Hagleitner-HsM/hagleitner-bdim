@@ -84,7 +84,15 @@
                     "description": "Elevation in meters above the WGS84 ellipsoid (EPSG:4326)."
                 }
             },
-            "description": "Geographic coordinates (WGS84, EPSG:4326)."
+            "description": "Geographic coordinates (WGS84, EPSG:4326).",
+            "dependentRequired": {
+                "latitude": [
+                    "longitude"
+                ],
+                "longitude": [
+                    "latitude"
+                ]
+            }
         }
     }
 }
