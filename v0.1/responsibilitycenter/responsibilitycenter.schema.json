@@ -1,0 +1,62 @@
+{
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/businessunit.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "BusinessUnit",
+    "type": "object",
+    "unevaluatedProperties": false,
+    "required": [
+        "id",
+        "name1"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier for the responsibility center."
+        },
+        "code": {
+            "type": "string",
+            "pattern": "[A-Z]{1,20}$",
+            "description": "The unique identifier for the responsibility center."
+        },
+        "departmentCode": {
+            "type": "string",
+            "pattern": "[A-Z]{1,10}$",
+            "description": "The unique identifier for the responsibility center."
+        },
+        "locationCode":{
+            "type": "string",
+            "pattern": "[A-Z]{1,10}$",
+            "description": ""
+        },
+        "name1": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "The name of the responsibility center."
+        },
+        "name2": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "The name of the responsibility center."
+        },
+        "phoneNumber":{
+            "$ref": "../components/basetypes.schema.json#/$defs/phoneE164OrNull"
+        },
+        "emailAddress":{
+            "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull"
+        } ,
+        "logisticsManagerId":{
+            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull"
+        },
+        "organizationManager":{
+            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull"
+        }        
+    },
+    "allOf": [
+        {
+            "$ref": "../components/address.schema.json"
+        }
+    ]
+
+    
+}

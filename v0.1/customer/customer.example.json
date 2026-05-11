@@ -2,7 +2,7 @@
   "id": "b7e6a1c2-3f4d-4e2a-9b1a-123456789abc",
   "crmCustomerNumber": "A1234",
   "erpCustomerNumber": "15988712",
-  "erpTenantId": "0f1e2d3c-4b5a-6978-8091-a2b3c4d5e6f7",
+  "erpTenantId": "c0f28562-5896-47c2-905f-2fe079ad18f8",
   "name1": "Acme Corporation",
   "name2": "Sales Department",
   "name3": null,
@@ -26,16 +26,16 @@
   "roles": ["reseller"],
   "customerRelations": {
     "reseller": {
-      "ancestorCustomerId": "d2f1e3c4-5b6a-7c8d-9e0f-123456789def"
+      "ancestorCustomerId": "37f24a85-5a03-4a16-8958-b8c3024e9294"
     },
     "invoiceRecipient": {
-      "ancestorCustomerId": "a1b2c3d4-e5f6-7a8b-9c0d-1234567890ab"
+      "ancestorCustomerId": "1c2e70e7-9b2c-4e72-a43e-16501e23e16a"
     },
     "conditionOwner": {
-      "ancestorCustomerId": "f4e5d6c7-b8a9-0d1e-2f34-56789abcdef0"
+      "ancestorCustomerId": "22d33cd9-32f7-44a5-99db-b16d2cfcf024"
     },
     "parent": {
-      "ancestorCustomerId": "e3c4d5b6-a7c8-9d0e-1f23-456789abcdef"
+      "ancestorCustomerId": "03e1bd90-398b-4d4b-b860-e7741695eac5"
     }
   },
   "address1": "Musterstraße 1",

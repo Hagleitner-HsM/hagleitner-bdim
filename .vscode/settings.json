@@ -6,5 +6,11 @@
       ],
       "url": "./v0.1/customer/customer.schema.json"
     },
+    {
+      "fileMatch": [
+        "**/v0.1/**/responsibilitycenter.example*.json"
+      ],
+      "url": "./v0.1/responsibilitycenter/responsibilitycenter.schema.json"
+    },
   ]
 }

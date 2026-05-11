@@ -21,12 +21,9 @@ The CRM must implement a logic that determines the correct tenat. Could be the 1
 Name of the customer, split in up to 3 parts for printing postal addresses.
 `name4` is intentionally not implemented as this is just an OEM specific addon in HsM.
 
-#### TODO
-* (CRM) Decide if the owner shall really not provide a concatenated name.
-
 ### `phoneNumber1`, `phoneNumber2`
 Phone numbers of the customer
-CRM must enforce valid phone numbers (google libphonenumber).
+(Business) Phone number validation should be performed by the owner
 
 ### `emailAddresses{}`
 We use an object containing multiple email address properties, each of them having a defined semantic.
@@ -38,12 +35,13 @@ We use an object containing multiple email address properties, each of them havi
 
 ### `statusCode`
 
-Rationale:
-Inherited statusCodes in BC may lead to only eventually consistent dat in the CRM.
-Interpretation of statusCode is up to the system that has the data.
+Noe:
+* Propagated statusCodes in BC may lead to only eventually consistent dat in the CRM.
+* Interpretation of statusCode is up to the system that has the data.
 
 ### `statusCodeReason`
-TODO: make dependend on status code.
+#### TODO
+* Provide Valid list of status codes
 
 ### `blockedFor`
 
@@ -63,11 +61,6 @@ While this is the BCP47 language tag, it is also used to derive the locale or cu
 ### `timezone`
 Only canonical IANA timeZones are allowed
 
-#### TODO
-* Probably skip for version 0.1, but discuss with Orbis if this is something they can theortically provide, or if we anyway have to implement this in another sytem
-* How to protect? SAS token, Rest Endpoint?
-* Specify image format, auotmatic resizing, etc.
-
 ### `taxIdentificationNumber`
 Rationale:
 * VAT is Europe only
@@ -77,12 +70,12 @@ Rationale:
 * (Business) Who owns all the tax numbers / BC vs CRM
 * (Business) Validation of tax numbers (e.g. automated online check)
 
-### `roles[]`
-Instead of using individual flags like `isReseller`, roles provide a more abstract and extensible model for associating customers with one or more roles. Roles might also have role-spcific data models, which—if necessary—are modelled as separate entities.
-
 Candidates:
 
 * Reseller
+
+### `roles[]`
+Instead of using individual flags like `isReseller`, roles provide a more abstract and extensible model for associating customers with one or more roles. Roles might also have role-spcific data models, which—if necessary—are modelled as separate entities.
 
 ##### Role changes
 * Reseller role cannot be removed the customer has linked sub-customers
@@ -108,8 +101,6 @@ This is the max  date and time when any of the properties of this entity was cre
 #### `updatedAt`
 This is the max  date and time when any of the properties of this entity was last changed
 
-#### `contentHash`
-Hash of the customer content for change detection.
 
 
 ## Properties not yet in the schema
@@ -125,31 +116,12 @@ E.g. HHAT. A code uniquely identifying a customer.
 * May be a uniqueCustomerAlias, theoretically available for all customers
 * May be a problem with delete/undelete
 
-### `block` (not yet part of model)
-* ERP: status = Freigabestatus: Is this needed any where?
-* ERP: blockedInERP: 0: not blocked, 1: blocked for delivery but invoicing still possible, 2: blocked for Invoicing (), 3: completely blocked
-* ERP:BlockreasonCode
-* ERP: requestForBlockERP (block pending)
-* Who defines "CanUseDigitalServices", "CanOrder", ...
-#### TODOS:
-* Exact definition of block 
-* What happens if an ancestor is blocked (each realtionship)
-* What happens if the side-effects of blocking affects multiple customers, and if these side-effects are calculated in ERP
-
 * `customerDisplayName` Preferred human-readable customer name for display in user interfaces; may be derived from name1, name2, and name3 if not explicitly maintained.
-
-* `IsLead` or some kind of customer classification would make sense for other tools that only want to work with "active" customers. If any system other than the CRM, wants to work with leads, then this classification is necessary.
 
 ## General questions and todos
 
-* Bi-directional synchronization of customer data in Phase 1
 * The `customer` in our model is a very generic entity. Spezializations of a customer might need additional properties. In that case we use role profiles e.g. `customerResellerProfile` to communicate additional properties for that role.
-* Email addresses as specific email properties: pro: explicit, con: new types need contract change (but as they convey meaning, they anyway have to.)
 * `geolocationQuality`: Probably not relevant in the CRM, keep it in the FLS if possible (like name4 in hsm)
-* `responsibilityCenter` could be modelled as a customer with a responsibilityCenter role, plus a customer relationship.
-
-
-
 
 ## Sequence
 * Customer creation shall be done without any relations other than the reseller relationship, all other relationships are created using a separate entity `customerRelation`
@@ -160,4 +132,3 @@ E.g. HHAT. A code uniquely identifying a customer.
 * homepage: URI
 * currencyCode: ISO 4217, default = EUR
 * shippingInstruction: Volllieferung Teillieferung (noch unklar) enum
-* avatar
