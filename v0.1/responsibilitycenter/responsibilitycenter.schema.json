@@ -31,12 +31,12 @@
             "description": ""
         },
         "name1": {
-            "type": "string",
+            "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
             "maxLength": 50,
             "description": "The name of the responsibility center."
         },
         "name2": {
-            "type": "string",
+            "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 50,
             "description": "The name of the responsibility center."
         },
