@@ -6,12 +6,11 @@
     "required": [
         "id",
         "name1",
-        "lifeCycleStatus",
+        "statusCode",
         "customerRelations",
         "languageTag",
         "createdAt",
-        "contentHash",
-        "owningSystem"
+        "contentHash"
     ],
     "properties": {
         "id": {
@@ -26,35 +25,39 @@
                 "ERP"
             ],
             "description": "The system that owns the customer record. Only the owning system is allowed to set and update the content of the customer record, other systems can only read the record and may not update it. The owning system is responsible for setting the contentHash property based on the content of the customer record.",
-            "x-status": "approved"
+            "x-status": "needDiscussion"
         },
         "erpTenantId": {
             "$ref": "../components/basetypes.schema.json#/$defs/uuid",
-            "description": "UUID of the ERP tenant associated with this customer. This Id must be set by the owning system.",
-            "x-status": "inDiscussion1"
+            "description": "UUID of the ERP tenant associated with this customer. This Id must be set by the owning system."
         },
         "name1": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
             "maxLength": 100,
-            "description": "Primary customer name line."
+            "description": "Primary customer name line.",
+            "x-status": "approved"
         },
         "name2": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 50,
-            "description": "Secondary customer name line."
+            "description": "Secondary customer name line.",
+            "x-status": "approved"
         },
         "name3": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 30,
-            "description": "Tertiary customer name line."
+            "description": "Tertiary customer name line.",
+            "x-status": "approved"
         },
         "phoneNumber1": {
             "$ref": "../components/basetypes.schema.json#/$defs/phoneE164OrNull",
-            "description": "Phone number 1"
+            "description": "Phone number 1",
+            "x-status": "approved"
         },
         "phoneNumber2": {
             "$ref": "../components/basetypes.schema.json#/$defs/phoneE164OrNull",
-            "description": "Phone number 2"
+            "description": "Phone number 2",
+            "x-status": "approved"
         },
         "emailAddresses": {
             "type": "object",
@@ -90,39 +93,60 @@
                 }
             },
             "unevaluatedProperties": false,
-            "minProperties": 1
+            "x-status": "needDiscussion"
         },
-        "lifeCycleStatus": {
+        "statusCode": {
             "type": "string",
             "enum": [
                 "active",
                 "inactive"
             ],
             "description": "The status of the customer",
-            "default": "active"
+            "default": "active",
+            "x-status": "approved"
+        },
+        "statusCodeReason": {
+            "type": "string",
+            "enum": [
+                "",
+                ""
+            ],
+            "description": "The status of the customer",
+            "default": "active",
+            "x-status": "approved"
+        },
+        "blockedFor": {
+            "type": "string",
+            "enum": [
+                "none",
+                "shipping",
+                "invoicing",
+                "all"
+            ],
+            "default": "none",
+            "x-status": "approved"
+        },
+        "blockedForReasonId": {
+            "type": "string",
+            "format": "uuid",
+            "x-status": "needDiscussion"
         },
         "languageTag": {
-            "type": "string",
-            "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z]{2}|\\-[A-Za-z]{4})?$",
-            "description": "A BCP 47 language tag that identifies the language context, often including region or script. The locale tag is used as the key for resolving a locale or culture with concrete formatting conventions."
+            "$ref": "../components/basetypes.schema.json#/$defs/languageTag",
+            "description": "A BCP 47 language tag that identifies the language context, often including region or script. The languag tag is used as the key for resolving a locale or culture with concrete formatting conventions.",
+            "x-status": "approved"
         },
         "timezone": {
             "type": "string",
             "pattern": "^[A-Za-z]+/[A-Za-z_]+(?:/[A-Za-z_]+)?$",
             "description": "The IANA time zone identifier representing the customer's time zone, such as 'America/New_York' or 'Europe/Berlin'.",
-            "default": "Etc/UTC"
-        },
-        "avatar": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "format": "uri",
-            "description": "URL to the customer's avatar image."
+            "default": "Etc/UTC",
+            "x-status": "approved"
         },
         "taxIdentificationNumber": {
             "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
-            "description": "The customer's VAT identification number, starting with a two-letter country code followed by alphanumeric characters."
+            "description": "The customer's VAT identification number, starting with a two-letter country code followed by alphanumeric characters.",
+            "x-status": "approved"
         },
         "roles": {
             "type": "array",
@@ -134,6 +158,7 @@
             },
             "uniqueItems": true,
             "description": "Roles assigned to the customer",
+            "x-status": "needDiscussion",
             "minItems": 1
         },
         "customerRelations": {
@@ -205,24 +230,65 @@
         "createdAt": {
             "type": "string",
             "format": "date-time",
-            "description": "RFC 3339 date-time when the customer was first created in the owning system."
+            "description": "RFC 3339 date-time when the customer was first created in the owning system.",
+            "x-status": "approved"
         },
         "updatedAt": {
             "type": "string",
             "format": "date-time",
-            "description": "RFC 3339 date-time when the customer was last updated in the owning system."
-        }        
+            "description": "RFC 3339 date-time when the customer was last updated in the owning system.",
+            "x-status": "approved"
+        }
     },
+    "allOf": [
+        {
+            "$ref": "../components/address.schema.json"
+        },
+        {
+            "if": {
+                "properties": {
+                    "blockedFor": {
+                        "enum": [
+                            "shipping",
+                            "invoicing",
+                            "all"
+                        ]
+                    }
+                },
+                "required": [
+                    "blockedFor"
+                ]
+            },
+            "then": {
+                "required": [
+                    "blockedForReasonId"
+                ]
+            }
+        },   
+        {
+            "if": {
+                "properties": {
+                    "statusCode": {
+                        "enum": ["inactive"]
+                    }
+                },
+                "required": [
+                    "statusCode"
+                ]
+            },
+            "then": {
+                "required": [
+                    "statusCodeReason"
+                ]
+            }
+        }          
+    ],
     "dependentRequired": {
         "name2": [
             "name1"
         ],
-        "name3": [
-            "name2",
-            "name1"
+        "blockedForReasonId": [
+            "blockedFor"
         ]
-    },
-    "allOf": [
-        { "$ref": "../components/address.schema.json" }
-    ]
+    }   
 }

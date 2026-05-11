@@ -17,17 +17,9 @@ Given to make the life of the ERP easier, i.e. an erp attribute stored in the BD
 
 The CRM must implement a logic that determines the correct tenat. Could be the 1st level reseller on the reseller relationship path.
  
-### crmCustomerNumber
-
-### `erpCustomerNumber`
-* The customer number is optional
-* Customer number is unique per reseller only
-* Customer number might be defined by the reseller (i.e. not only by Hagleitner Tenants)
-
-
-
 ### `name1`, `name2`, `name3`
 Name of the customer, split in up to 3 parts for printing postal addresses.
+`name4` is intentionally not implemented as this is just an OEM specific addon in HsM.
 
 #### TODO
 * (CRM) Decide if the owner shall really not provide a concatenated name.
@@ -36,31 +28,40 @@ Name of the customer, split in up to 3 parts for printing postal addresses.
 Phone numbers of the customer
 CRM must enforce valid phone numbers (google libphonenumber).
 
-#### TODOS
-* (CRM) Reevaluate this model with CRM-experts. The current implementation is jsut 2 semantic-less numbers, alternative: Array of phone numbers objects, with type/tag.
-
 ### `emailAddresses{}`
 We use an object containing multiple email address properties, each of them having a defined semantic.
 
-(CRM) There is a specific logic in the ERP system when to use what email address and also what to fallback to, in case a needed address is not filled.
-
-### `lifeCycleStatus`
-
 #### TODO
-* (CRM) Some validation rules depend on the lifeCycleStatus, e.g. a unique customerNumber is only unique within active customers
-* (CRM) Changing from deleted to active is not always possible, e.g. uniqueness constraints must be checked
-* (CRM) What life-cycle status do we realy have
-* (CRM) What happens to customer relations if the ancestor is marked as deleted
+* (Business) is at least one e-mail address mandatory?
+* (Business) are the invoicing e-mail addresses really adrresse that can only be managed in CRM (in future)
+* (CRM) There is a specific logic in the ERP system when to use what email address and also what to fallback to, in case a needed address is not filled.
+
+### `statusCode`
+
+Rationale:
+Inherited statusCodes in BC may lead to only eventually consistent dat in the CRM.
+Interpretation of statusCode is up to the system that has the data.
+
+### `statusCodeReason`
+TODO: make dependend on status code.
+
+### `blockedFor`
+
+### ``blockedForReason``
+Separate entity
+
+#### TODO: 
+* (ERP) UUIDs
+* Definition of Entity
+* Multilanguage?
+* QUeue structure (one event topic for multiple owned entities?)
+
 
 ### `languageTag`
 While this is the BCP47 language tag, it is also used to derive the locale or culture with formatting conventions. 
 
 ### `timezone`
-
 Only canonical IANA timeZones are allowed
-
-### `avatar`
-A URL that points to the avatar image resource.
 
 #### TODO
 * Probably skip for version 0.1, but discuss with Orbis if this is something they can theortically provide, or if we anyway have to implement this in another sytem
@@ -72,7 +73,9 @@ Rationale:
 * VAT is Europe only
 
 #### TODO
-* (CRM) Validation must be done in code based on country code. 
+* Structure: Object with named tax number properties, Array with tagged tax numbers
+* (Business) Who owns all the tax numbers / BC vs CRM
+* (Business) Validation of tax numbers (e.g. automated online check)
 
 ### `roles[]`
 Instead of using individual flags like `isReseller`, roles provide a more abstract and extensible model for associating customers with one or more roles. Roles might also have role-spcific data models, which—if necessary—are modelled as separate entities.
@@ -157,4 +160,4 @@ E.g. HHAT. A code uniquely identifying a customer.
 * homepage: URI
 * currencyCode: ISO 4217, default = EUR
 * shippingInstruction: Volllieferung Teillieferung (noch unklar) enum
-* 
+* avatar

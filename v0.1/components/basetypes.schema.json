@@ -10,7 +10,10 @@
             "pattern": "^[^\\u0000-\\u001F\\u007F\\s](?:[^\\u0000-\\u001F\\u007F]*[^\\u0000-\\u001F\\u007F\\s])?$"
         },
         "singleLineTextOrNull": {
-            "type": ["string", "null"],
+            "type": [
+                "string",
+                "null"
+            ],
             "minLength": 1,
             "pattern": "^[^\\u0000-\\u001F\\u007F\\s](?:[^\\u0000-\\u001F\\u007F]*[^\\u0000-\\u001F\\u007F\\s])?$"
         },
@@ -19,16 +22,25 @@
             "format": "uuid"
         },
         "phoneE164OrNull": {
-            "type": ["string", "null"],
+            "type": [
+                "string",
+                "null"
+            ],
             "description": "Phone number formatted as E.164",
             "pattern": "^\\+[1-9]\\d{1,14}$"
         },
         "emailOrNull": {
-            "type": ["string", "null"],
+            "type": [
+                "string",
+                "null"
+            ],
             "format": "email"
         },
         "uuidOrNull": {
-            "type": ["string", "null"],
+            "type": [
+                "string",
+                "null"
+            ],
             "format": "uuid"
         },
         "contentHash": {
@@ -37,6 +49,42 @@
             "maxLength": 64,
             "pattern": "^[a-f0-9]{64}$",
             "description": "Cryptographic hash of the object's canonical content, excluding the contentHash property itself."
+        },
+        "languageTag": {
+            "type": "string",
+            "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z]{2}|\\-[A-Za-z]{4})?$",
+            "description": "A BCP 47 language tag that identifies the language context, often including region or script. The languag tag is used as the key for resolving a locale or culture with concrete formatting conventions."
+        },
+        "geoLocation": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "required": [
+                "latitude",
+                "longitude"
+            ],
+            "unevaluatedProperties": false,
+            "properties": {
+                "latitude": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                },
+                "longitude": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                },
+                "elevation": {
+                    "type": [
+                        "number",
+                        "null"
+                    ],
+                    "description": "Elevation in meters above the WGS84 ellipsoid (EPSG:4326)."
+                }
+            },
+            "description": "Geographic coordinates (WGS84, EPSG:4326)."
         }
     }
 }

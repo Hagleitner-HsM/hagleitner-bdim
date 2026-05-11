@@ -10,41 +10,39 @@
     "properties": {
         "address1": {
             "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
-            "maxLength": 100
+            "maxLength": 100,
+            "x-status": "approved"
         },
         "address2": {
             "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
-            "maxLength": 50
+            "maxLength": 50,
+            "x-status": "approved"
         },
         "postalCode": {
             "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
-            "maxLength": 20
+            "maxLength": 20,
+            "x-status": "approved"
         },
         "city": {
             "$ref": "basetypes.schema.json#/$defs/singleLineText",
-            "maxLength": 30
+            "maxLength": 30,
+            "x-status": "approved"
         },
         "stateOrProvince": {
             "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
-            "maxLength": 30
+            "maxLength": 30,
+            "x-status": "approved"
         },
         "countryCode": {
             "type": "string",
             "pattern": "^[A-Z]{2}$",
-            "description": "A valid ISO 3166-1 alpha-2 country code"
+            "description": "A valid ISO 3166-1 alpha-2 country code"            ,
+            "x-status": "approved"
         },
-        "latitude": {
-            "type": "number",
-            "description": "Latitude of the location associated with the address, given in decimal degrees (WGS84, EPSG:4326)",
-            "minimum": -90,
-            "maximum": 90
-        },
-        "longitude": {
-            "type": "number",
-            "description": "Longitude of the location associated with the address, given in decimal degrees (WGS84, EPSG:4326)",        
-            "minimum": -180,
-            "maximum": 180           
-        }
+        "geoLocation": {
+            "$ref": "basetypes.schema.json#/$defs/geoLocation",
+            "x-status": "approved"
+         }
     },
     "dependentRequired": {
         "latitude": [

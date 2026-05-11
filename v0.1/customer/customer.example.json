@@ -17,10 +17,11 @@
     "paymentReminderCc": null,
     "shippingAdvice": "warehouse@acme.com"
   },
-  "lifeCycleStatus": "active",
+  "statusCode": "active",
+  "blockedFor": "shipping",
+  "blockedForReasonId": "51282897-0fc7-4657-8eab-e10ed413eef9",
   "languageTag": "de-AT",
   "timezone": "Europe/Vienna",
-  "avatar": "https://cdn.acme.com/avatars/acme-corp.png",
   "taxIdentificationNumber": "ATU12345678",
   "roles": ["reseller"],
   "customerRelations": {
@@ -43,8 +44,10 @@
   "city": "Innsbruck",
   "stateOrProvince": null,
   "countryCode": "AT",
-  "latitude": 47.202778,
-  "longitude": 14.280833,
+  "geoLocation": {
+    "latitude": 47.202778,
+    "longitude": 14.280833
+  },
   "createdAt": "2025-03-15T08:30:00Z",
   "updatedAt": "2025-03-20T12:15:00+02:00",
   "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"

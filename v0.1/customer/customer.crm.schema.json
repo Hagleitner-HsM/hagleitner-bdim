@@ -9,8 +9,9 @@
     "properties": {
         "crmCustomerNumber": {
             "type": ["string"],
-            "pattern": "^[A-Z][0-9]{1,7}$",
-            "description": "Customer number uniquely identifies a customer within a reseller's customer base."
+            "pattern": "^[ABDEFGHJKMNPQRSTUVWXY][0-9]{1,6}$",
+            "description": "Customer number uniquely identifies a customer within a reseller's customer base.",
+            "x-status": "approved"
         }
     }
 }

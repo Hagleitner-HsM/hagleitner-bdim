@@ -1,10 +1,10 @@
 {
-    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.crm.schema.json",
+    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.erp.schema.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "description": "CRM Customer",
+    "description": "ERP Customer",
     "type": "object",
     "required": [
-        "crmCustomerNumber"
+        "erpCustomerNumber"
     ],
     "properties": {
         "erpCustomerNumber": {
