@@ -1,7 +1,8 @@
 {
-    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/businessunit.schema.json",
+    "$id": "https://schema.hagleitner.com/bdim/v0.1/responsibilitycenter.schema.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "BusinessUnit",
+    "x-revision": "2026-05-11",
+    "title": "ResponsibilityCenter",
     "type": "object",
     "unevaluatedProperties": false,
     "required": [

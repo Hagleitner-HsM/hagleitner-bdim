@@ -19,7 +19,7 @@
   },
   "statusCode": "active",
   "blockedFor": "shipping",
-  "blockedForReasonId": "51282897-0fc7-4657-8eab-e10ed413eef9",
+  "blockedForReason": "51282897-0fc7-4657-8eab-e10ed413eef9",
   "languageTag": "de-AT",
   "timezone": "Europe/Vienna",
   "taxIdentificationNumber": "ATU12345678",

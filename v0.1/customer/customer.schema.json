@@ -1,6 +1,7 @@
 {
-    "$id": "https://schema.hagleitner.com/bdim/2026-06-01/customer.schema.json",
+    "$id": "https://schema.hagleitner.com/bdim/v0.1/customer.schema.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "x-revision": "2026-05-11",
     "description": "Customer",
     "type": "object",
     "unevaluatedProperties": false,
