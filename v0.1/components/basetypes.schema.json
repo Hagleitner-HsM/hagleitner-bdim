@@ -57,6 +57,10 @@
             "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z]{2}|\\-[A-Za-z]{4})?$",
             "description": "A BCP 47 language tag that identifies the language context, often including region or script. The languag tag is used as the key for resolving a locale or culture with concrete formatting conventions."
         },
+        "code": {
+            "type": "string",
+            "pattern": "^[A-Z0-9]+$"
+        },
         "geoLocation": {
             "type": [
                 "object",
