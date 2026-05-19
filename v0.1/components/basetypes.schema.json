@@ -99,6 +99,27 @@
                     "latitude"
                 ]
             }
+        },
+        "localizedText": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "languageTag": {
+                        "$ref": "#/$defs/languageTag"
+                    },
+                    "text": {
+                        "$ref": "#/$defs/singleLineText"
+                    }
+                },
+                "required": [
+                    "languageTag",
+                    "text"
+                ],
+                "unevaluatedProperties": false
+            },
+            "minItems": 1,
+            "description": "An array of translations for a given text property, where each translation includes a language tag and the corresponding translated text."
         }
     }
 }

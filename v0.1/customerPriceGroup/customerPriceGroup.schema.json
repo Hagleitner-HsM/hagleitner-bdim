@@ -1,0 +1,47 @@
+{
+    "$id": "https://schema.hagleitner.com/bdim/v0.1/customerpricegroup.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "x-revision": "2026-05-12",
+    "title": "CustomerPRiceGroup",
+    "type": "object",
+    "unevaluatedProperties": false,
+    "required": [
+        "id",
+        "code",
+        "erpTenantIds",
+        "description"
+    ],
+    "properties": {
+        "id": {
+            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+            "description": "The unique identifier for the customer price group.",
+            "x-status": "needsDiscussion"
+        },
+        "code": {
+            "$ref": "../components/basetypes.schema.json#/$defs/code",
+            "maxLength": 20,
+            "description": "The unique code for the responsibility center.",
+            "x-status": "needsDiscussion"
+        },
+        "description": {
+            "$ref": "../components/basetypes.schema.json#/$defs/localizedText",
+            "description": "Description of the customer price group.",
+            "x-status": "needsDiscussion"
+        },
+        "erpTenantIds": {
+            "type": "array",
+            "items": {
+                "$ref": "../components/basetypes.schema.json#/$defs/uuid"
+            },
+            "description": "UUIDs of the ERP tenants associated with this customer. These Ids must be set by the owning system.",
+            "minItems": 1,
+            "x-status": "needsDiscussion"
+        },
+        "activeForPriceBookCustomer": { 
+            "type": "boolean",
+            "description": "Indicates whether the customer price group is active for price book customers.",
+            "x-status": "needsDiscussion",
+            "default": false
+        }
+    }
+}
