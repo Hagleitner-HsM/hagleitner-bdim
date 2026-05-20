@@ -2,7 +2,7 @@
     "$id": "https://schema.hagleitner.com/bdim/v0.1/address.schema.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "x-revision": "2026-05-11",
-    "description": "Address",
+    "description": "General schema for postal addresses",
     "type": "object",
     "required": [
         "city",
@@ -10,27 +10,27 @@
     ],
     "properties": {
         "address1": {
-            "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
+            "$ref": "baseTypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 100,
             "x-status": "approved"
         },
         "address2": {
-            "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
+            "$ref": "baseTypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 50,
             "x-status": "approved"
         },
         "postalCode": {
-            "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
+            "$ref": "baseTypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 20,
-            "x-status": "approved"
+            "x-status": "needsDiscussion"
         },
         "city": {
-            "$ref": "basetypes.schema.json#/$defs/singleLineText",
+            "$ref": "baseTypes.schema.json#/$defs/singleLineText",
             "maxLength": 30,
-            "x-status": "approved"
+            "x-status": "needsDiscussion"
         },
         "stateOrProvince": {
-            "$ref": "basetypes.schema.json#/$defs/singleLineTextOrNull",
+            "$ref": "baseTypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 30,
             "x-status": "approved"
         },
@@ -41,7 +41,7 @@
             "x-status": "approved"
         },
         "geoLocation": {
-            "$ref": "basetypes.schema.json#/$defs/geoLocation",
+            "$ref": "baseTypes.schema.json#/$defs/geoLocation",
             "x-status": "approved"
          }
     },

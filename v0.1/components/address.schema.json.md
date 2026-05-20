@@ -11,8 +11,14 @@ Rationale:
 * We use postal code instead of zipCode since zipCode is US-specific, most international schemas (OASIS, schema.ort etc.) use postal code
 * The postal code is not required since there are countries that have no postal code system.
 
+#### Todo
+* is this a reference or a string
+
 ### `city`
 Rationale: maxLength 30 is historical for Hagleitner, we keep this restriction
+
+#### Todo
+* is this a reference or a string
 
 ## `stateorProvince`
 Many countries require a state or province. 

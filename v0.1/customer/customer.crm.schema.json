@@ -2,7 +2,7 @@
     "$id": "https://schema.hagleitner.com/bdim/v0.1/customer.crm.schema.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "x-revision": "2026-05-11",
-    "description": "CRM Customer",
+    "description": "Schema for the CRM-owned customer attribute partition",
     "type": "object",
     "required": [
         "crmCustomerNumber"

@@ -1,8 +1,8 @@
 {
-    "$id": "https://schema.hagleitner.com/bdim/v0.1/basetypes.schema.json",
+    "$id": "https://schema.hagleitner.com/bdim/v0.1/baseTypes.schema.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "x-revision": "2026-05-11",
-    "description": "Address",
+    "x-revision": "2026-05-20",
+    "description": "Base types for various reusable components",
     "type": "object",
     "$defs": {
         "singleLineText": {
@@ -40,8 +40,12 @@
         },
         "uuidOrNull": {
             "anyOf": [
-                { "$ref": "#/$defs/uuid" },
-                { "type": "null" }
+                {
+                    "$ref": "#/$defs/uuid"
+                },
+                {
+                    "type": "null"
+                }
             ],
             "description": "UUID or null."
         },
@@ -101,22 +105,28 @@
             }
         },
         "localizedText": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "languageTag": {
-                        "$ref": "#/$defs/languageTag"
-                    },
-                    "text": {
-                        "$ref": "#/$defs/singleLineText"
+            "type": "object",
+            "properties": {
+                "translations": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "languageTag": {
+                                "$ref": "#/$defs/languageTag"
+                            },
+                            "text": {
+                                "$ref": "#/$defs/singleLineText"
+                            }
+                        },
+                        "required": [
+                            "languageTag",
+                            "text"
+                        ],
+                        "unevaluatedProperties": false,
+                        "minItems": 1
                     }
-                },
-                "required": [
-                    "languageTag",
-                    "text"
-                ],
-                "unevaluatedProperties": false
+                }
             },
             "minItems": 1,
             "description": "An array of translations for a given text property, where each translation includes a language tag and the corresponding translated text."

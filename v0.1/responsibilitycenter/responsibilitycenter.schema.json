@@ -1,8 +1,7 @@
 {
-    "$id": "https://schema.hagleitner.com/bdim/v0.1/responsibilitycenter.schema.json",
+    "$id": "https://schema.hagleitner.com/bdim/v0.1/responsibilityCenter.schema.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "x-revision": "2026-05-12",
-    "title": "ResponsibilityCenter",
     "type": "object",
     "unevaluatedProperties": false, 
     "required": [
@@ -12,57 +11,57 @@
     ],
     "properties": {
         "id": {
-            "$ref": "../components/basetypes.schema.json#/$defs/uuid",
+            "$ref": "../components/baseTypes.schema.json#/$defs/uuid",
             "description": "The unique identifier for the responsibility center.",
             "x-status": "approved"
         },
         "code": {
-            "$ref": "../components/basetypes.schema.json#/$defs/code",
+            "$ref": "../components/baseTypes.schema.json#/$defs/code",
             "maxLength": 20,
             "description": "The unique code for the responsibility center.",
             "x-status": "approved"
         },
         "costCenter": {
-            "$ref": "../components/basetypes.schema.json#/$defs/code",
+            "$ref": "../components/baseTypes.schema.json#/$defs/code",
             "maxLength": 20,
             "description": "The unique code of the cost center that the responsibility center belongs to.",
             "x-status": "approved"
         },
         "warehouseLocation":{
-            "$ref": "../components/basetypes.schema.json#/$defs/code",
+            "$ref": "../components/baseTypes.schema.json#/$defs/code",
             "maxLength": 10,
             "description": "The code of the warehouse associated with the responsibility center.",
             "x-status": "approved"
         },
         "name1": {
-            "$ref": "../components/basetypes.schema.json#/$defs/singleLineText",
+            "$ref": "../components/baseTypes.schema.json#/$defs/singleLineText",
             "maxLength": 50,
             "description": "The name of the responsibility center.",
             "x-status": "approved"
         },
         "name2": {
-            "$ref": "../components/basetypes.schema.json#/$defs/singleLineTextOrNull",
+            "$ref": "../components/baseTypes.schema.json#/$defs/singleLineTextOrNull",
             "maxLength": 50,
             "description": "The name of the responsibility center.",
             "x-status": "approved"
         },
         "phoneNumber":{
-            "$ref": "../components/basetypes.schema.json#/$defs/phoneE164OrNull",
+            "$ref": "../components/baseTypes.schema.json#/$defs/phoneE164OrNull",
             "description": "Phone number of the responsibility center.",
             "x-status": "approved"
         },
         "emailAddress":{
-            "$ref": "../components/basetypes.schema.json#/$defs/emailOrNull",
+            "$ref": "../components/baseTypes.schema.json#/$defs/emailOrNull",
             "description": "Email address of the responsibility center.",
             "x-status": "approved"
         } ,
         "logisticsManagerId":{
-            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull",
+            "$ref": "../components/baseTypes.schema.json#/$defs/uuidOrNull",
             "description": "The ID of the logistics manager.",
             "x-status": "approved"
         },
         "organizationManagerId":{
-            "$ref": "../components/basetypes.schema.json#/$defs/uuidOrNull",
+            "$ref": "../components/baseTypes.schema.json#/$defs/uuidOrNull",
             "description": "The ID of the organization manager.",
             "x-status": "approved"
         }        
